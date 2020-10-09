@@ -1,0 +1,9 @@
+type Bot
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }])
+  @model {
+  id: ID!
+  name: String!
+  clientId: ID!
+  clientSecret: ID!
+  token: ID!
+}
