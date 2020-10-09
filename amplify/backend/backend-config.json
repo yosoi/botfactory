@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "botfactoryf63c96f6": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
