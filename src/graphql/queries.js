@@ -9,6 +9,9 @@ export const getBot = /* GraphQL */ `
       clientId
       clientSecret
       token
+      instanceId
+      instanceState
+      prefix
       createdAt
       updatedAt
       owner
@@ -28,6 +31,9 @@ export const listBots = /* GraphQL */ `
         clientId
         clientSecret
         token
+        instanceId
+        instanceState
+        prefix
         createdAt
         updatedAt
         owner

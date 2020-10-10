@@ -9,6 +9,9 @@ export const onCreateBot = /* GraphQL */ `
       clientId
       clientSecret
       token
+      instanceId
+      instanceState
+      prefix
       createdAt
       updatedAt
       owner
@@ -23,6 +26,9 @@ export const onUpdateBot = /* GraphQL */ `
       clientId
       clientSecret
       token
+      instanceId
+      instanceState
+      prefix
       createdAt
       updatedAt
       owner
@@ -37,6 +43,9 @@ export const onDeleteBot = /* GraphQL */ `
       clientId
       clientSecret
       token
+      instanceId
+      instanceState
+      prefix
       createdAt
       updatedAt
       owner

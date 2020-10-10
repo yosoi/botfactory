@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "function": {
+      "getBotName": [
+        "read"
+      ],
+      "getInstanceState": [
+        "read"
+      ]
+    }
+  }
+}

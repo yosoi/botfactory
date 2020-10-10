@@ -1,0 +1,60 @@
+{
+    "paths": [
+        {
+            "name": "/bot/{botId}/config",
+            "lambdaFunction": "getBotConfig",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/bot/*/config"
+        },
+        {
+            "name": "/bot/{botId}/response",
+            "lambdaFunction": "getBotResponse",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/bot/*/response"
+        }
+    ],
+    "resourceName": "botfactory",
+    "apiName": "botfactory",
+    "functionArns": [
+        {
+            "lambdaFunction": "getBotConfig"
+        },
+        {
+            "lambdaFunction": "getBotResponse"
+        }
+    ],
+    "privacy": {
+        "auth": 2,
+        "unauth": 0,
+        "authRoleName": "amplify-botfactory-dev-93634-authRole",
+        "unAuthRoleName": "amplify-botfactory-dev-93634-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "getBotConfig",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "getBotResponse",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
