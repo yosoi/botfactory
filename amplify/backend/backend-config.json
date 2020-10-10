@@ -65,7 +65,22 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "executeGraphQLOperation",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "executeBotCommand",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ]
     },
     "executeGraphQLOperation": {
       "build": true,
@@ -110,6 +125,12 @@
       "dependsOn": []
     },
     "getInstanceState": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    },
+    "executeBotCommand": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

@@ -33,12 +33,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "getBotName",
+            "executeBotCommand",
             {
               "Fn::Join": [
                 "",
                 [
-                  "getBotName",
+                  "executeBotCommand",
                   "-",
                   {
                     "Ref": "env"
@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/getBotName-315a4d5a32427943794b-build.zip"
+          "S3Key": "amplify-builds/executeBotCommand-526d6e50756c51627976-build.zip"
         }
       }
     },
@@ -79,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "botfactoryLambdaRole860861db",
+            "botfactoryLambdaRole8a2198bd",
             {
               "Fn::Join": [
                 "",
                 [
-                  "botfactoryLambdaRole860861db",
+                  "botfactoryLambdaRole8a2198bd",
                   "-",
                   {
                     "Ref": "env"

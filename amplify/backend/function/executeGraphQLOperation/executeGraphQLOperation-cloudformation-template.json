@@ -83,7 +83,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/executeGraphQLOperation-47317139536e73493047-build.zip"
+          "S3Key": "amplify-builds/executeGraphQLOperation-665446444b7159496136-build.zip"
         }
       }
     },
