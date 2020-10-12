@@ -4,5 +4,11 @@
     },
     "unauthRoleName": {
         "Ref": "UnauthRoleName"
+    },
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authbotfactoryf63c96f6",
+            "Outputs.UserPoolId"
+        ]
     }
 }

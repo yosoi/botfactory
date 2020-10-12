@@ -9,6 +9,10 @@
     },
     "env": {
       "Type": "String"
+    },
+    "apibotfactoryGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apibotfactoryGraphQLAPIIdOutput"
     }
   },
   "Conditions": {
@@ -33,12 +37,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "getBotName",
+            "deleteBot",
             {
               "Fn::Join": [
                 "",
                 [
-                  "getBotName",
+                  "deleteBot",
                   "-",
                   {
                     "Ref": "env"
@@ -55,6 +59,35 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_BOTFACTORY_BOTTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apibotfactoryGraphQLAPIIdOutput}:GetAtt:BotTable:Name"
+              }
+            },
+            "API_BOTFACTORY_BOTTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apibotfactoryGraphQLAPIIdOutput}:GetAtt:BotTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_BOTFACTORY_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apibotfactoryGraphQLAPIIdOutput"
             }
           }
         },
@@ -69,7 +102,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/getBotName-315a4d5a32427943794b-build.zip"
+          "S3Key": "amplify-builds/deleteBot-4152666c414454663830-build.zip"
         }
       }
     },
@@ -79,12 +112,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "botfactoryLambdaRole860861db",
+            "botfactoryLambdaRole3f3355d1",
             {
               "Fn::Join": [
                 "",
                 [
-                  "botfactoryLambdaRole860861db",
+                  "botfactoryLambdaRole3f3355d1",
                   "-",
                   {
                     "Ref": "env"
@@ -150,6 +183,76 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apibotfactoryGraphQLAPIIdOutput}:GetAtt:BotTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apibotfactoryGraphQLAPIIdOutput}:GetAtt:BotTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

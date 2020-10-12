@@ -1,19 +1,20 @@
-# TODO: create custom lambda resolver mutations for this type
-# TODO: get bot name from lambda field resolver via discord api using clientId
-# TODO: set instance id in custom create mutation after instancing an image
-# TODO: get instance state via lambda field resolver via ec2 using instanceId
-# TODO: set create and update mutations = null
 type Bot
   @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }])
-  @model {
+  @model(mutations: null, subscriptions: null) {
   id: ID!
   name: String!
-  clientId: ID!
-  clientSecret: ID!
   token: ID!
   instanceId: ID!
-  instanceState: InstanceState!
+  instanceState: InstanceState! @function(name: "resolveField-${env}")
   prefix: String!
+}
+
+input CreateBotInput {
+  token: ID!
+}
+
+input DeleteBotInput {
+  id: ID!
 }
 
 enum InstanceState {
@@ -23,4 +24,20 @@ enum InstanceState {
   TERMINATED
   STOPPING
   STOPPED
+}
+
+input ModelBotConditionInput {
+  and: [ModelBotConditionInput]
+  or: [ModelBotConditionInput]
+  not: ModelBotConditionInput
+}
+
+type Mutation {
+  createBot(input: CreateBotInput!, condition: ModelBotConditionInput): Bot
+  deleteBot(input: DeleteBotInput!, condition: ModelBotConditionInput): Bot
+}
+
+type Subscription {
+  onCreateBot(id: ID): Bot @aws_subscribe(mutations: ["createBot"])
+  onDeleteBot(id: ID): Bot @aws_subscribe(mutations: ["deleteBot"])
 }

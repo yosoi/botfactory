@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "Bot:@model(appsync)": [
+        "create"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

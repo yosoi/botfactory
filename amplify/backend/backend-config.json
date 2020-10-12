@@ -104,25 +104,12 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "getBotName",
-          "attributes": [
-            "Name"
-          ]
-        },
-        {
-          "category": "function",
           "resourceName": "getInstanceState",
           "attributes": [
             "Name"
           ]
         }
       ]
-    },
-    "getBotName": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
     },
     "getInstanceState": {
       "build": true,
@@ -135,6 +122,34 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": []
+    },
+    "createBot": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "botfactory",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "deleteBot": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "botfactory",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
     }
   }
 }

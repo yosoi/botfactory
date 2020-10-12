@@ -6,15 +6,12 @@ export const getBot = /* GraphQL */ `
     getBot(id: $id) {
       id
       name
-      clientId
-      clientSecret
       token
       instanceId
       instanceState
       prefix
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -28,15 +25,12 @@ export const listBots = /* GraphQL */ `
       items {
         id
         name
-        clientId
-        clientSecret
         token
         instanceId
         instanceState
         prefix
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
