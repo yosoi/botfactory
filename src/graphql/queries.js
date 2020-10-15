@@ -36,3 +36,32 @@ export const listBots = /* GraphQL */ `
     }
   }
 `;
+export const botsByInstanceId = /* GraphQL */ `
+  query BotsByInstanceId(
+    $instanceId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelBotFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    botsByInstanceId(
+      instanceId: $instanceId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        token
+        instanceId
+        instanceState
+        prefix
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

@@ -1,5 +1,16 @@
 type Bot
-  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }])
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @key(
+    name: "ByInstanceId"
+    fields: ["instanceId"]
+    queryField: "botsByInstanceId"
+  )
   @model(mutations: null, subscriptions: null) {
   id: ID!
   name: String!

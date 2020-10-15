@@ -8,12 +8,23 @@ Amplify Params - DO NOT EDIT */
 
 const AWS = require("aws-sdk");
 
+const { createRecord } = require("/opt/createRecord.js");
+const { getEnvData } = require("/opt/getEnvData.js");
+
 const BOT_TABLE = getEnvData(process.env, "API_BOTFACTORY_BOTTABLE_NAME");
 
-const documentClient = new AWS.DynamoDB.DocumentClient();
+// TODO: store these values in environment variables
+const IMAGE_ID = "ami-00534d46ac7fc5d75";
+const INSTANCE_TYPE = "t2.micro";
+const KEY_NAME = "botfactory_admin_keypair";
+
+const db = new AWS.DynamoDB.DocumentClient();
+const ec2 = new AWS.EC2(); // TODO: possibly add version to this, like in the example
 
 exports.handler = async (event) => {
+  console.log("before await createInstance");
   const instanceId = await createInstance();
+  console.log("after await createInstance");
   const record = {
     id: event.id,
     name: "Untitled",
@@ -21,30 +32,28 @@ exports.handler = async (event) => {
     prefix: "!",
     instanceId: instanceId,
   };
-  await createRecord(documentClient, record);
+  await createRecord(db, BOT_TABLE, record);
   return record;
 };
 
 function createInstance() {
-  // TODO: runInstance and return instance id
-  return "12345";
-}
-
-// TODO: extract to reusable layer
-function createRecord(client, record) {
-  return client
-    .put({
-      TableName: BOT_TABLE,
-      Item: record,
+  console.log("start creating ec2 instance");
+  return ec2
+    .runInstances({
+      ImageId: IMAGE_ID,
+      InstanceType: INSTANCE_TYPE,
+      KeyName: KEY_NAME,
+      MaxCount: 1,
+      MinCount: 1,
     })
-    .promise();
-}
-
-// TODO: extract to reusable layer
-function getEnvData(environment, key) {
-  const data = environment[key];
-  if (data) {
-    return data;
-  }
-  throw new Error(`Function requires environment variable: '${key}'`);
+    .promise()
+    .then((response) => {
+      console.log("finished creating ec2 instance");
+      console.log(response);
+      return response.Instances[0].InstanceId;
+    })
+    .catch((error) => {
+      console.log("catching error");
+      console.log(error);
+    });
 }

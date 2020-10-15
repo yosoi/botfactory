@@ -2,9 +2,18 @@
   "permissions": {
     "api": {
       "botfactory": [
-        "read"
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "awsUtilitiesLayer",
+      "version": 2
+    }
+  ]
 }

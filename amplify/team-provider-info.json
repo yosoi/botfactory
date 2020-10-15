@@ -14,6 +14,62 @@
     "categories": {
       "auth": {
         "botfactoryf63c96f6": {}
+      },
+      "function": {
+        "awsUtilitiesLayer": {
+          "deploymentBucketName": "amplify-botfactory-dev-93634-deployment",
+          "s3Key": "amplify-builds/awsUtilitiesLayer-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "awsUtilitiesLayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "748706229283"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "2CXXzDGfscUWUQBCQxpP+rwjgqbATjbUKhOdzb7wI+U="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "748706229283"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "gP/JfmyAYHL4DgnET0l7Py0KJCeikgze9DxxBvCaF4A="
+            },
+            "3": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "748706229283"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "e8KK4a86uq8sDApP98J1KvdbwRGhy6+yPrmOktITK0U="
+            }
+          }
+        }
       }
     }
   }

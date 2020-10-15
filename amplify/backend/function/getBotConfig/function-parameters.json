@@ -1,5 +1,11 @@
 {
-  "lambdaLayers": [],
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "awsUtilitiesLayer",
+      "version": 2
+    }
+  ],
   "permissions": {
     "function": {
       "executeGraphQLOperation": [

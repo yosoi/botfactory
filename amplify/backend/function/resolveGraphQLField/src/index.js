@@ -5,8 +5,12 @@
 Amplify Params - DO NOT EDIT */
 
 const AWS = require("aws-sdk");
+const { getEnvData, invokeLambda } = require("/opt/utils.js");
 
-const GET_INSTANCE_STATE = getEnvData("FUNCTION_GETINSTANCESTATE_NAME");
+const GET_INSTANCE_STATE = getEnvData(
+  process.env,
+  "FUNCTION_GETINSTANCESTATE_NAME"
+);
 
 const lambda = new AWS.Lambda();
 
@@ -26,24 +30,6 @@ exports.handler = async (event) => {
   throw new Error("Resolver not found.");
 };
 
-function getEnvData(key) {
-  const data = process.env[key];
-  if (data) {
-    return data;
-  }
-  throw new Error(`Function requires environment variable: '${key}'`);
-}
-
 function getInstanceState(instanceId) {
   return invokeLambda(lambda, GET_INSTANCE_STATE, instanceId);
-}
-
-// TODO: extract to reusable layer
-function invokeLambda(client, name, payload) {
-  return client
-    .invoke({ FunctionName: name, Payload: JSON.stringify(payload) })
-    .promise()
-    .then((response) => {
-      return JSON.parse(response);
-    });
 }

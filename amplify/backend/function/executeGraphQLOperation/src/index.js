@@ -9,17 +9,14 @@ const AWS = require("aws-sdk");
 const https = require("https");
 const urlParse = require("url").URL;
 
-const APPSYNC_URL = process.env.API_BOTFACTORY_GRAPHQLAPIENDPOINTOUTPUT;
-if (!APPSYNC_URL) {
-  throw new Error(
-    `Function requires environment variable: 'API_BOTFACTORY_GRAPHQLAPIENDPOINTOUTPUT'`
-  );
-}
+const { getEnvData } = require("/opt/getEnvData.js");
 
-const REGION = process.env.REGION;
-if (!REGION) {
-  throw new Error(`Function requires environment variable: 'REGION'`);
-}
+const APPSYNC_URL = getEnvData(
+  process.env,
+  "API_BOTFACTORY_GRAPHQLAPIENDPOINTOUTPUT"
+);
+
+const REGION = getEnvData(process.env, "REGION");
 
 const endpoint = new urlParse(APPSYNC_URL).hostname.toString();
 
@@ -33,7 +30,6 @@ exports.handler = async (event) => {
 
 function executeGraphQLOperation(operation, operationName, item) {
   const request = new AWS.HttpRequest(APPSYNC_URL, REGION);
-
   request.method = "POST";
   request.path = "/graphql";
   request.headers.host = endpoint;

@@ -19,7 +19,11 @@
               "userPoolId": "authbotfactoryf63c96f6"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
         }
       }
     },
@@ -58,6 +62,13 @@
           "attributes": [
             "Name"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "awsUtilitiesLayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
@@ -93,6 +104,13 @@
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "awsUtilitiesLayer",
+          "attributes": [
+            "Arn"
           ]
         }
       ]
@@ -134,6 +152,13 @@
           "attributes": [
             "GraphQLAPIIdOutput"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "awsUtilitiesLayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
@@ -150,6 +175,11 @@
           ]
         }
       ]
+    },
+    "awsUtilitiesLayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   }
 }

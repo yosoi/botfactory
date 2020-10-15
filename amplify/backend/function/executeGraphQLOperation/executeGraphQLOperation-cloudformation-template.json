@@ -10,6 +10,10 @@
     "env": {
       "Type": "String"
     },
+    "functionawsUtilitiesLayerArn": {
+      "Type": "String",
+      "Default": "functionawsUtilitiesLayerArn"
+    },
     "apibotfactoryGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apibotfactoryGraphQLAPIIdOutput"
@@ -79,11 +83,15 @@
           ]
         },
         "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:awsUtilitiesLayer-dev:2"
+          }
+        ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/executeGraphQLOperation-665446444b7159496136-build.zip"
+          "S3Key": "amplify-builds/executeGraphQLOperation-614432584f626e484373-build.zip"
         }
       }
     },
@@ -187,8 +195,13 @@
             {
               "Effect": "Allow",
               "Action": [
+                "appsync:Create*",
+                "appsync:StartSchemaCreation",
+                "appsync:GraphQL",
                 "appsync:Get*",
-                "appsync:List*"
+                "appsync:List*",
+                "appsync:Update*",
+                "appsync:Delete*"
               ],
               "Resource": [
                 {
