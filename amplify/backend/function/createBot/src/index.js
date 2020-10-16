@@ -14,17 +14,15 @@ const { getEnvData } = require("/opt/getEnvData.js");
 const BOT_TABLE = getEnvData(process.env, "API_BOTFACTORY_BOTTABLE_NAME");
 
 // TODO: store these values in environment variables
-const IMAGE_ID = "ami-00534d46ac7fc5d75";
-const INSTANCE_TYPE = "t2.micro";
+const IMAGE_ID = "ami-060e1062f0ce84b5e";
+const INSTANCE_TYPE = "t2.nano";
 const KEY_NAME = "botfactory_admin_keypair";
 
 const db = new AWS.DynamoDB.DocumentClient();
-const ec2 = new AWS.EC2(); // TODO: possibly add version to this, like in the example
+const ec2 = new AWS.EC2();
 
 exports.handler = async (event) => {
-  console.log("before await createInstance");
   const instanceId = await createInstance();
-  console.log("after await createInstance");
   const record = {
     id: event.id,
     name: "Untitled",
@@ -37,7 +35,6 @@ exports.handler = async (event) => {
 };
 
 function createInstance() {
-  console.log("start creating ec2 instance");
   return ec2
     .runInstances({
       ImageId: IMAGE_ID,
@@ -48,12 +45,7 @@ function createInstance() {
     })
     .promise()
     .then((response) => {
-      console.log("finished creating ec2 instance");
       console.log(response);
       return response.Instances[0].InstanceId;
-    })
-    .catch((error) => {
-      console.log("catching error");
-      console.log(error);
     });
 }

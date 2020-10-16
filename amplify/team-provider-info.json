@@ -67,6 +67,34 @@
                 }
               ],
               "hash": "e8KK4a86uq8sDApP98J1KvdbwRGhy6+yPrmOktITK0U="
+            },
+            "4": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "748706229283"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "obOMu3vNM4+5uiR/QZKUGsNvRrfxSDq4k5daqVFua7I="
+            },
+            "5": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "748706229283"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "e8KK4a86uq8sDApP98J1KvdbwRGhy6+yPrmOktITK0U="
             }
           }
         }

@@ -84,7 +84,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/getBotConfig-742b4b79457750574846-build.zip"
+          "S3Key": "amplify-builds/getBotConfig-3672394a744d2b626237-build.zip"
         }
       }
     },

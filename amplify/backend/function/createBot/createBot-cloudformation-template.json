@@ -104,13 +104,13 @@
         "Runtime": "nodejs12.x",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:awsUtilitiesLayer-dev:3"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:awsUtilitiesLayer-dev:4"
           }
         ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/createBot-63495658436f43766c2f-build.zip"
+          "S3Key": "amplify-builds/createBot-332f6e6c46374b7a7031-build.zip"
         }
       }
     },

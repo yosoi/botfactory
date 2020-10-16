@@ -33,6 +33,14 @@ exports.handler = async (event) => {
     operationName: "BotsByInstanceId",
     item: { instanceId: event.pathParameters.id },
   }).then((response) => {
-    return response.data.botsByInstanceId.items[0];
+    const config = response.data.botsByInstanceId.items[0];
+    const data = config ? config : { token: null, prefix: null };
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    };
   });
 };
