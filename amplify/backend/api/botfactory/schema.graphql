@@ -30,6 +30,11 @@ type Command
     ]
   )
   @key(name: "ByBotId", fields: ["botId"], queryField: "commandsByBotId")
+  @key(
+    name: "ByBotIdByTrigger"
+    fields: ["botId", "trigger"]
+    queryField: "commandsByBotIdByTrigger"
+  )
   @model {
   id: ID!
   botId: ID!

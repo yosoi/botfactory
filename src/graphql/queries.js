@@ -30,7 +30,50 @@ export const httpActionRequestHeadersByHttpActionId = /* GraphQL */ `
           responseTransformId
           createdAt
           updatedAt
+          requestTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          responseTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
           owner
+          actionHeaders {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
         owner
         header {
@@ -39,6 +82,35 @@ export const httpActionRequestHeadersByHttpActionId = /* GraphQL */ `
           value
           createdAt
           updatedAt
+          headerActions {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
           owner
         }
       }
@@ -75,7 +147,50 @@ export const httpActionRequestHeadersByHttpRequestHeaderId = /* GraphQL */ `
           responseTransformId
           createdAt
           updatedAt
+          requestTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          responseTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
           owner
+          actionHeaders {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
         owner
         header {
@@ -84,6 +199,35 @@ export const httpActionRequestHeadersByHttpRequestHeaderId = /* GraphQL */ `
           value
           createdAt
           updatedAt
+          headerActions {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
           owner
         }
       }
@@ -108,6 +252,55 @@ export const listBots = /* GraphQL */ `
         createdAt
         updatedAt
         commands {
+          items {
+            id
+            botId
+            trigger
+            actionId
+            createdAt
+            updatedAt
+            bot {
+              id
+              name
+              token
+              instanceId
+              instanceState
+              prefix
+              createdAt
+              updatedAt
+              commands {
+                nextToken
+              }
+            }
+            owner
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+          }
           nextToken
         }
       }
@@ -134,7 +327,64 @@ export const getBot = /* GraphQL */ `
           actionId
           createdAt
           updatedAt
+          bot {
+            id
+            name
+            token
+            instanceId
+            instanceState
+            prefix
+            createdAt
+            updatedAt
+            commands {
+              items {
+                id
+                botId
+                trigger
+                actionId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
           owner
+          action {
+            id
+            url
+            method
+            requestTransformId
+            responseTransformId
+            createdAt
+            updatedAt
+            requestTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            responseTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            owner
+            actionHeaders {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
         }
         nextToken
       }
@@ -166,6 +416,55 @@ export const botsByInstanceId = /* GraphQL */ `
         createdAt
         updatedAt
         commands {
+          items {
+            id
+            botId
+            trigger
+            actionId
+            createdAt
+            updatedAt
+            bot {
+              id
+              name
+              token
+              instanceId
+              instanceState
+              prefix
+              createdAt
+              updatedAt
+              commands {
+                nextToken
+              }
+            }
+            owner
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+          }
           nextToken
         }
       }
@@ -192,6 +491,55 @@ export const getCommand = /* GraphQL */ `
         createdAt
         updatedAt
         commands {
+          items {
+            id
+            botId
+            trigger
+            actionId
+            createdAt
+            updatedAt
+            bot {
+              id
+              name
+              token
+              instanceId
+              instanceState
+              prefix
+              createdAt
+              updatedAt
+              commands {
+                nextToken
+              }
+            }
+            owner
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+          }
           nextToken
         }
       }
@@ -220,6 +568,52 @@ export const getCommand = /* GraphQL */ `
         }
         owner
         actionHeaders {
+          items {
+            id
+            actionId
+            headerId
+            createdAt
+            updatedAt
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+            owner
+            header {
+              id
+              key
+              value
+              createdAt
+              updatedAt
+              headerActions {
+                nextToken
+              }
+              owner
+            }
+          }
           nextToken
         }
       }
@@ -249,6 +643,38 @@ export const listCommands = /* GraphQL */ `
           prefix
           createdAt
           updatedAt
+          commands {
+            items {
+              id
+              botId
+              trigger
+              actionId
+              createdAt
+              updatedAt
+              bot {
+                id
+                name
+                token
+                instanceId
+                instanceState
+                prefix
+                createdAt
+                updatedAt
+              }
+              owner
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
         owner
         action {
@@ -259,7 +685,50 @@ export const listCommands = /* GraphQL */ `
           responseTransformId
           createdAt
           updatedAt
+          requestTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          responseTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
           owner
+          actionHeaders {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
       }
       nextToken
@@ -297,6 +766,38 @@ export const commandsByBotId = /* GraphQL */ `
           prefix
           createdAt
           updatedAt
+          commands {
+            items {
+              id
+              botId
+              trigger
+              actionId
+              createdAt
+              updatedAt
+              bot {
+                id
+                name
+                token
+                instanceId
+                instanceState
+                prefix
+                createdAt
+                updatedAt
+              }
+              owner
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
         owner
         action {
@@ -307,7 +808,175 @@ export const commandsByBotId = /* GraphQL */ `
           responseTransformId
           createdAt
           updatedAt
+          requestTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          responseTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
           owner
+          actionHeaders {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const commandsByBotIdByTrigger = /* GraphQL */ `
+  query CommandsByBotIdByTrigger(
+    $botId: ID
+    $trigger: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommandFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commandsByBotIdByTrigger(
+      botId: $botId
+      trigger: $trigger
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        botId
+        trigger
+        actionId
+        createdAt
+        updatedAt
+        bot {
+          id
+          name
+          token
+          instanceId
+          instanceState
+          prefix
+          createdAt
+          updatedAt
+          commands {
+            items {
+              id
+              botId
+              trigger
+              actionId
+              createdAt
+              updatedAt
+              bot {
+                id
+                name
+                token
+                instanceId
+                instanceState
+                prefix
+                createdAt
+                updatedAt
+              }
+              owner
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
+        }
+        owner
+        action {
+          id
+          url
+          method
+          requestTransformId
+          responseTransformId
+          createdAt
+          updatedAt
+          requestTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          responseTransform {
+            id
+            name
+            template
+            createdAt
+            updatedAt
+          }
+          owner
+          actionHeaders {
+            items {
+              id
+              actionId
+              headerId
+              createdAt
+              updatedAt
+              action {
+                id
+                url
+                method
+                requestTransformId
+                responseTransformId
+                createdAt
+                updatedAt
+                owner
+              }
+              owner
+              header {
+                id
+                key
+                value
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+            nextToken
+          }
         }
       }
       nextToken
@@ -374,6 +1043,52 @@ export const listHttpActions = /* GraphQL */ `
         }
         owner
         actionHeaders {
+          items {
+            id
+            actionId
+            headerId
+            createdAt
+            updatedAt
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+            owner
+            header {
+              id
+              key
+              value
+              createdAt
+              updatedAt
+              headerActions {
+                nextToken
+              }
+              owner
+            }
+          }
           nextToken
         }
       }
@@ -413,7 +1128,61 @@ export const getHttpAction = /* GraphQL */ `
           headerId
           createdAt
           updatedAt
+          action {
+            id
+            url
+            method
+            requestTransformId
+            responseTransformId
+            createdAt
+            updatedAt
+            requestTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            responseTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            owner
+            actionHeaders {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
           owner
+          header {
+            id
+            key
+            value
+            createdAt
+            updatedAt
+            headerActions {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+            owner
+          }
         }
         nextToken
       }
@@ -438,6 +1207,52 @@ export const listHttpRequestHeaders = /* GraphQL */ `
         createdAt
         updatedAt
         headerActions {
+          items {
+            id
+            actionId
+            headerId
+            createdAt
+            updatedAt
+            action {
+              id
+              url
+              method
+              requestTransformId
+              responseTransformId
+              createdAt
+              updatedAt
+              requestTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              responseTransform {
+                id
+                name
+                template
+                createdAt
+                updatedAt
+              }
+              owner
+              actionHeaders {
+                nextToken
+              }
+            }
+            owner
+            header {
+              id
+              key
+              value
+              createdAt
+              updatedAt
+              headerActions {
+                nextToken
+              }
+              owner
+            }
+          }
           nextToken
         }
         owner
@@ -461,7 +1276,61 @@ export const getHttpRequestHeader = /* GraphQL */ `
           headerId
           createdAt
           updatedAt
+          action {
+            id
+            url
+            method
+            requestTransformId
+            responseTransformId
+            createdAt
+            updatedAt
+            requestTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            responseTransform {
+              id
+              name
+              template
+              createdAt
+              updatedAt
+            }
+            owner
+            actionHeaders {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
           owner
+          header {
+            id
+            key
+            value
+            createdAt
+            updatedAt
+            headerActions {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+            owner
+          }
         }
         nextToken
       }
