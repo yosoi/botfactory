@@ -1,14 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
 import "semantic-ui-css/semantic.min.css";
-import App from "./App";
+import "./index.css";
+
 import * as serviceWorker from "./serviceWorker";
 
+import Amplify from "aws-amplify";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom";
+import awsExports from "./aws-exports";
+
+Amplify.configure(awsExports);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
