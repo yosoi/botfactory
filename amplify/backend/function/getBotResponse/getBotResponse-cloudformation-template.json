@@ -14,6 +14,10 @@
       "Type": "String",
       "Default": "functionexecuteBotCommandName"
     },
+    "functionawsUtilitiesLayerArn": {
+      "Type": "String",
+      "Default": "functionawsUtilitiesLayerArn"
+    },
     "functionexecuteGraphQLOperationName": {
       "Type": "String",
       "Default": "functionexecuteGraphQLOperationName"
@@ -79,11 +83,15 @@
           ]
         },
         "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:awsUtilitiesLayer-dev:5"
+          }
+        ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-botfactory-dev-93634-deployment",
-          "S3Key": "amplify-builds/getBotResponse-423042527a714e445950-build.zip"
+          "S3Key": "amplify-builds/getBotResponse-35365136596e614a4b74-build.zip"
         }
       }
     },

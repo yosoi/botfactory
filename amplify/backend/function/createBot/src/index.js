@@ -14,7 +14,7 @@ const { getEnvData } = require("/opt/getEnvData.js");
 const BOT_TABLE = getEnvData(process.env, "API_BOTFACTORY_BOTTABLE_NAME");
 
 // TODO: store these values in environment variables
-const IMAGE_ID = "ami-060e1062f0ce84b5e";
+const IMAGE_ID = "ami-04224a2385f66cb28";
 const INSTANCE_TYPE = "t2.nano";
 const KEY_NAME = "botfactory_admin_keypair";
 

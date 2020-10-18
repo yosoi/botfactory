@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "DataTransform:@model(appsync)": [
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

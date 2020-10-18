@@ -18,23 +18,135 @@ type Bot
   instanceId: ID!
   instanceState: InstanceState! @function(name: "resolveField-${env}")
   prefix: String!
+  commands: [Command!]! @connection(keyName: "ByBotId", fields: ["id"])
+}
+
+type Command
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @key(name: "ByBotId", fields: ["botId"], queryField: "commandsByBotId")
+  @model {
+  id: ID!
+  botId: ID!
+  trigger: String!
+  bot: Bot @connection(fields: ["botId"])
+  actionId: ID!
+  action: HttpAction @connection(fields: ["actionId"])
 }
 
 input CreateBotInput {
   token: ID!
 }
 
+input CreateDataTransformInput {
+  name: String!
+  template: String!
+}
+
+type DataTransform
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @model(mutations: null, subscriptions: null) {
+  id: ID!
+  name: String!
+  template: String!
+}
+
 input DeleteBotInput {
   id: ID!
+}
+
+input DeleteDataTransformInput {
+  id: ID!
+}
+
+type HttpAction
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @model {
+  id: ID!
+  url: AWSURL!
+  method: Method!
+  actionHeaders: [HttpActionRequestHeader!]!
+    @connection(keyName: "ByHttpActionId", fields: ["id"])
+  requestTransformId: ID!
+  requestTransform: DataTransform @connection(fields: ["requestTransformId"])
+  responseTransformId: ID!
+  responseTransform: DataTransform @connection(fields: ["responseTransformId"])
+}
+
+type HttpActionRequestHeader
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @key(
+    name: "ByHttpActionId"
+    fields: ["actionId"]
+    queryField: "httpActionRequestHeadersByHttpActionId"
+  )
+  @key(
+    name: "ByHttpRequestHeaderId"
+    fields: ["headerId"]
+    queryField: "httpActionRequestHeadersByHttpRequestHeaderId"
+  )
+  @model(queries: null) {
+  id: ID!
+  actionId: ID!
+  headerId: ID!
+  action: HttpAction! @connection(fields: ["actionId"])
+  header: HttpRequestHeader! @connection(fields: ["headerId"])
+}
+
+type HttpRequestHeader
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, provider: iam }
+    ]
+  )
+  @model {
+  id: ID!
+  key: String!
+  value: String!
+  headerActions: [HttpActionRequestHeader!]!
+    @connection(keyName: "ByHttpRequestHeaderId", fields: ["id"])
 }
 
 enum InstanceState {
   PENDING
   RUNNING
   SHUTTING_DOWN
-  TERMINATED
-  STOPPING
   STOPPED
+  STOPPING
+  TERMINATED
+}
+
+enum Method {
+  DELETE
+  GET
+  PATCH
+  POST
+  PUT
 }
 
 input ModelBotConditionInput {
@@ -43,12 +155,30 @@ input ModelBotConditionInput {
   not: ModelBotConditionInput
 }
 
+input ModelDataTransformConditionInput {
+  and: [ModelDataTransformConditionInput]
+  or: [ModelDataTransformConditionInput]
+  not: ModelDataTransformConditionInput
+}
+
 type Mutation {
   createBot(input: CreateBotInput!, condition: ModelBotConditionInput): Bot
+  createDataTransform(
+    input: CreateDataTransformInput!
+    condition: ModelDataTransformConditionInput
+  ): DataTransform
   deleteBot(input: DeleteBotInput!, condition: ModelBotConditionInput): Bot
+  deleteDataTransform(
+    input: DeleteDataTransformInput!
+    condition: ModelDataTransformConditionInput
+  ): DataTransform
 }
 
 type Subscription {
   onCreateBot(id: ID): Bot @aws_subscribe(mutations: ["createBot"])
+  onCreateDataTransform(id: ID!): DataTransform
+    @aws_subscribe(mutations: ["createDataTransform"])
   onDeleteBot(id: ID): Bot @aws_subscribe(mutations: ["deleteBot"])
+  onDeleteDataTransform(id: ID!): DataTransform
+    @aws_subscribe(mutations: ["deleteDataTransform"])
 }
