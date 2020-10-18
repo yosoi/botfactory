@@ -1,48 +1,63 @@
 import { Route, Switch } from "react-router-dom";
 
 import AuthWrapper from "bits/AuthWrapper";
+import EditBot from "bits/EditBot";
+import EditHeaders from "bits/EditHeaders";
+import EditTransforms from "bits/EditTransforms";
 import MainMenu from "bits/MainMenu";
+import NewBot from "bits/NewBot";
 import Page from "bits/Page";
 import React from "react";
 
-const ACCOUNT = "Account";
 const HEADERS = "Headers";
 const TRANSFORMS = "Transforms";
 
 function App() {
   const bots = [
-    { id: "maester", name: "Maester", path: "/bot/maester" },
-    { id: "untitled", name: "Untitled", path: "/bot/untitled" },
-    { id: "workbot", name: "Workbot", path: "/bot/workbot" },
+    { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
+    {
+      id: "untitled",
+      name: "Untitled",
+      path: "/bot/untitled",
+      text: "untitiled",
+    },
+    { id: "workbot", name: "Workbot", path: "/bot/workbot", text: "workbot" },
   ];
 
   const views = [
-    { name: HEADERS, icon: "code", path: "/headers", text: HEADERS },
     {
+      component: <EditHeaders></EditHeaders>,
+      name: HEADERS,
+      icon: "code",
+      path: "/headers",
+      text: HEADERS,
+    },
+    {
+      component: <EditTransforms></EditTransforms>,
       name: TRANSFORMS,
       icon: "exchange",
       path: "/transforms",
       text: TRANSFORMS,
     },
-    { name: ACCOUNT, icon: "setting", path: "/account", text: ACCOUNT },
   ];
 
   return (
     <AuthWrapper>
       <Page
-        menu={
-          <MainMenu
-            content={
-              <Switch>
-                {bots.concat(views).map(({ path, text }) => (
-                  <Route path={path}>{text}</Route>
-                ))}
-              </Switch>
-            }
-            bots={bots}
-            views={views}
-          ></MainMenu>
+        content={
+          <Switch>
+            <Route path="/bot/new" exact>
+              <NewBot></NewBot>
+            </Route>
+            <Route path="/bot/">
+              <EditBot></EditBot>
+            </Route>
+            {views.map((view) => (
+              <Route path={view.path}>{view.component}</Route>
+            ))}
+          </Switch>
         }
+        menu={<MainMenu bots={bots} views={views}></MainMenu>}
       ></Page>
     </AuthWrapper>
   );

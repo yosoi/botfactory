@@ -27,7 +27,7 @@ export default function Page(props) {
                 <Menu.Item
                   icon="map"
                   as={Link}
-                  content="Learn"
+                  content="Docs"
                   target="_blank"
                   to=""
                 ></Menu.Item>
@@ -60,5 +60,4 @@ export default function Page(props) {
       </Grid.Row>
     </Grid>
   );
-  //   return <div>{props.children}</div>;
 }

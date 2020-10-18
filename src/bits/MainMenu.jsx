@@ -8,8 +8,8 @@ export default function MainMenu({ bots, views }) {
   return (
     <div>
       <Menu fluid vertical secondary>
-        <Menu.Item align="center" header as="h3">
-          botspot
+        <Menu.Item align="center" header as="h1" className="logo">
+          botspot.
         </Menu.Item>
         <Menu.Item>
           <Button
@@ -26,7 +26,7 @@ export default function MainMenu({ bots, views }) {
       </Menu>
       <Menu fluid pointing vertical>
         <Menu.Item>
-          Bots
+          Roster
           <Menu.Menu>
             {bots.map((bot) => (
               <Menu.Item
@@ -46,15 +46,19 @@ export default function MainMenu({ bots, views }) {
             key={item.name}
             name={item.name}
             to={item.path}
+            {...item.props}
           >
             <Icon name={item.icon}></Icon>
             {item.text}
           </Menu.Item>
         ))}
+        <Menu.Item as={Link} name="billing" target="_blank" to="">
+          <Icon name="credit card"></Icon>Billing
+        </Menu.Item>
       </Menu>
       <Button
         as={Link}
-        content="Learn"
+        content="Docs"
         fluid
         icon="map"
         labelPosition="left"
