@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import signOut from "bits/signOut";
 
-export default function Page(props) {
+export default function Page({ content, menu }) {
   return (
     <Grid padded>
       <Grid.Row>
@@ -37,7 +37,7 @@ export default function Page(props) {
                     content="Lock"
                     icon="lock"
                     labelPosition="left"
-                    primary
+                    secondary
                     onClick={(e) => signOut(e)}
                   ></Button>
                 </Menu.Item>
@@ -51,9 +51,9 @@ export default function Page(props) {
           <Grid centered columns={3}>
             <Grid.Row>
               <Grid.Column>
-                {props.content}
-                <Rail position="left">{props.menu.primary}</Rail>
-                <Rail position="right">{props.menu.secondary}</Rail>
+                {content}
+                <Rail position="left">{menu.primary}</Rail>
+                <Rail position="right">{menu.secondary}</Rail>
               </Grid.Column>
             </Grid.Row>
           </Grid>

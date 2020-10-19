@@ -56,7 +56,7 @@ function App() {
               <Route path="/bot/new" exact>
                 <NewBot></NewBot>
               </Route>
-              <Route path="/bot/">
+              <Route path="/bot/:botId">
                 <EditBot></EditBot>
               </Route>
               {views.map((view) => (

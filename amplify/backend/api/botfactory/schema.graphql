@@ -85,6 +85,7 @@ type HttpAction
   )
   @model {
   id: ID!
+  name: String!
   url: AWSURL!
   method: Method!
   actionHeaders: [HttpActionRequestHeader!]!

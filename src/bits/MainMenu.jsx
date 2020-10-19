@@ -33,7 +33,7 @@ export default function MainMenu({ bots, views }) {
                 activeClassName="active"
                 key={bot.id}
                 name={bot.name}
-                to={`/bot/${bot.id}`}
+                to={`/bot/${bot.id}/commands`}
               ></Menu.Item>
             ))}
           </Menu.Menu>
@@ -71,7 +71,7 @@ export default function MainMenu({ bots, views }) {
         fluid
         icon="lock"
         labelPosition="left"
-        primary
+        secondary
         onClick={(e) => signOut(e)}
         style={{ marginTop: "1rem" }}
       ></Button>
