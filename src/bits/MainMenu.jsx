@@ -19,7 +19,6 @@ export default function MainMenu({ bots, views }) {
             icon="add"
             labelPosition="left"
             primary
-            size="mini"
             to="/bot/new"
           ></Button>
         </Menu.Item>

@@ -4,13 +4,19 @@ import AuthWrapper from "bits/AuthWrapper";
 import EditBot from "bits/EditBot";
 import EditHeaders from "bits/EditHeaders";
 import EditTransforms from "bits/EditTransforms";
+import { Elements } from "@stripe/react-stripe-js";
 import MainMenu from "bits/MainMenu";
 import NewBot from "bits/NewBot";
 import Page from "bits/Page";
 import React from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
 const HEADERS = "Headers";
+const PUBLISHABLE_STRIPE_KEY =
+  "pk_test_51H6rIkIw1gARdZqqtmeFOSI8nsqdyHQAtH2XRAkSMSkzCz5AZCPwsUU1BVPqFOa8uwrFihNrMjEkAC7NkEHI7gsF00MxWZlulW";
 const TRANSFORMS = "Transforms";
+
+const stripePromise = loadStripe(PUBLISHABLE_STRIPE_KEY);
 
 function App() {
   const bots = [
@@ -42,24 +48,29 @@ function App() {
   ];
 
   return (
-    <AuthWrapper>
-      <Page
-        content={
-          <Switch>
-            <Route path="/bot/new" exact>
-              <NewBot></NewBot>
-            </Route>
-            <Route path="/bot/">
-              <EditBot></EditBot>
-            </Route>
-            {views.map((view) => (
-              <Route path={view.path}>{view.component}</Route>
-            ))}
-          </Switch>
-        }
-        menu={<MainMenu bots={bots} views={views}></MainMenu>}
-      ></Page>
-    </AuthWrapper>
+    <Elements stripe={stripePromise}>
+      <AuthWrapper>
+        <Page
+          content={
+            <Switch>
+              <Route path="/bot/new" exact>
+                <NewBot></NewBot>
+              </Route>
+              <Route path="/bot/">
+                <EditBot></EditBot>
+              </Route>
+              {views.map((view) => (
+                <Route path={view.path}>{view.component}</Route>
+              ))}
+            </Switch>
+          }
+          menu={{
+            primary: <MainMenu bots={bots} views={views}></MainMenu>,
+            secondary: <div></div>,
+          }}
+        ></Page>
+      </AuthWrapper>
+    </Elements>
   );
 }
 

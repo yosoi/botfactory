@@ -52,7 +52,8 @@ export default function Page(props) {
             <Grid.Row>
               <Grid.Column>
                 {props.content}
-                <Rail position="left">{props.menu}</Rail>
+                <Rail position="left">{props.menu.primary}</Rail>
+                <Rail position="right">{props.menu.secondary}</Rail>
               </Grid.Column>
             </Grid.Row>
           </Grid>
