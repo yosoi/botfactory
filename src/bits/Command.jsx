@@ -8,13 +8,14 @@ export default function Command({ command, actions }) {
       fluid
       iconPosition="left"
       type="text"
-      placeholder="Trigger word"
+      placeholder="Command trigger"
       action
     >
       <Icon name="quote left"></Icon>
       <input />
       <Select compact options={actions} />
-      <Button negative icon="close"></Button>
+      <Button icon="check"></Button>
+      <Button icon="close"></Button>
     </Input>
   );
 }

@@ -15,20 +15,26 @@ import React from "react";
 export default function Action({ action, headers, httpMethods, transforms }) {
   return (
     <div>
-      <Segment attached="top" color="blue" padded>
-        <Header as="h5" content="Action" icon="lightning"></Header>
-      </Segment>
-      <Segment attached padded>
+      <Menu attached="top">
+        <Menu.Item>
+          <Input
+            transparent
+            icon="tag"
+            iconPosition="left"
+            placeholder="Name your action..."
+          ></Input>
+        </Menu.Item>
+        <Menu.Menu icon position="right">
+          <Menu.Item onClick={() => {}}>
+            <Icon name="check"></Icon>
+          </Menu.Item>
+          <Menu.Item onClick={() => {}}>
+            <Icon name="close"></Icon>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+      <Segment attached="bottom" stacked style={{ backgroundColor: "#fafafa" }}>
         <Form>
-          <Form.Field>
-            <Input
-              fluid
-              icon="tag"
-              iconPosition="left"
-              type="text"
-              placeholder="Name"
-            ></Input>
-          </Form.Field>
           <Form.Field>
             <Input
               fluid
@@ -71,24 +77,6 @@ export default function Action({ action, headers, httpMethods, transforms }) {
             />
           </Form.Field>
         </Form>
-      </Segment>
-      <Segment attached="bottom" stacked>
-        <Button.Group widths={2}>
-          <Button
-            positive
-            content="Update"
-            icon="cloud upload"
-            labelPosition="left"
-            fluid
-          ></Button>
-          <Button
-            negative
-            content="Delete"
-            icon="close"
-            labelPosition="left"
-            fluid
-          ></Button>
-        </Button.Group>
       </Segment>
     </div>
   );

@@ -1,4 +1,12 @@
-import { Button, Form, Header, List, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Divider,
+  Form,
+  Header,
+  Icon,
+  List,
+  Segment,
+} from "semantic-ui-react";
 
 import CardField from "bits/CardField";
 import React from "react";
@@ -7,7 +15,7 @@ import View from "bits/View";
 export default function NewBot() {
   return (
     <div>
-      <Segment inverted padded>
+      <Segment padded>
         <Header as="h5" content="Spawn a new bot" icon="star"></Header>
         <List>
           <List.Item>
@@ -26,7 +34,16 @@ export default function NewBot() {
             </List.Content>
           </List.Item>
         </List>
+        <p>
+          Not sold yet?{" "}
+          <a href="" target="_blank">
+            Check out the docs.
+          </a>
+        </p>
       </Segment>
+      <Divider section horizontal>
+        <Icon name="hand point down outline"></Icon>
+      </Divider>
       <Segment padded raised>
         <Form>
           <Form.Field>

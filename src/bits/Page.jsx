@@ -37,7 +37,6 @@ export default function Page({ content, menu }) {
                     content="Lock"
                     icon="lock"
                     labelPosition="left"
-                    secondary
                     onClick={(e) => signOut(e)}
                   ></Button>
                 </Menu.Item>

@@ -6,6 +6,7 @@ import {
   Icon,
   Input,
   Menu,
+  Pagination,
   Segment,
 } from "semantic-ui-react";
 import { NavLink, Route, Switch, useParams } from "react-router-dom";
@@ -31,41 +32,105 @@ export default function EditBot() {
   return (
     <div>
       <Menu attached="top" tabular>
-        <Menu.Item
-          activeClassName="active"
-          as={NavLink}
-          to={`/bot/${botId}/commands`}
-          name="commands"
-          icon="bullhorn"
-        ></Menu.Item>
-        <Menu.Item
-          activeClassName="active"
-          as={NavLink}
-          to={`/bot/${botId}/actions`}
-          name="actions"
-          icon="lightning"
-        ></Menu.Item>
+        <Menu.Item header>{bot.name}</Menu.Item>
+        <Menu.Menu position="right">
+          <Menu.Item
+            activeClassName="active"
+            as={NavLink}
+            to={`/bot/${botId}/commands`}
+            name="commands"
+            icon="bullhorn"
+          ></Menu.Item>
+          <Menu.Item
+            activeClassName="active"
+            as={NavLink}
+            to={`/bot/${botId}/actions`}
+            name="actions"
+            icon="lightning"
+          ></Menu.Item>
+          <Menu.Item
+            activeClassName="active"
+            as={NavLink}
+            to={`/bot/${botId}/settings`}
+            name="settings"
+            icon="cog"
+          ></Menu.Item>
+        </Menu.Menu>
       </Menu>
-      <Segment attached padded="very">
-        <Form>
-          <Switch>
-            <Route path={`/bot/${botId}/commands`}>
+      <Segment attached="bottom" padded="very">
+        <Switch>
+          <Route path={`/bot/${botId}/commands`}>
+            <Menu>
+              <Menu.Item>
+                <Input
+                  icon="filter"
+                  placeholder="Filter commands..."
+                  iconPosition="left"
+                  transparent
+                ></Input>
+              </Menu.Item>
+              <Menu.Menu icon position="right">
+                <Menu.Item onClick={() => {}}>
+                  <Icon name="add"></Icon>
+                </Menu.Item>
+                <Menu.Item onClick={() => {}}>
+                  <Icon name="info circle"></Icon>
+                </Menu.Item>
+              </Menu.Menu>
+            </Menu>
+            <Divider section horizontal>
+              <Icon name="hand point down outline"></Icon>
+            </Divider>
+            <Form>
               {commands.map((command) => (
                 <Form.Field>
                   <Command actions={actions} command={command}></Command>
                 </Form.Field>
               ))}
-              <Form.Field>
-                <Button
-                  content="Add a new command"
-                  fluid
-                  icon="add"
-                  labelPosition="left"
-                  primary
-                ></Button>
-              </Form.Field>
-            </Route>
-            <Route path={`/bot/${botId}/actions`}>
+            </Form>
+            <Divider section horizontal hidden></Divider>
+            <Pagination
+              defaultActivePage={1}
+              ellipsisItem={{
+                content: <Icon name="ellipsis horizontal" />,
+                icon: true,
+              }}
+              firstItem={{
+                content: <Icon name="angle double left" />,
+                icon: true,
+              }}
+              lastItem={{
+                content: <Icon name="angle double right" />,
+                icon: true,
+              }}
+              prevItem={{ content: <Icon name="angle left" />, icon: true }}
+              nextItem={{ content: <Icon name="angle right" />, icon: true }}
+              totalPages={10}
+            />
+          </Route>
+          <Route path={`/bot/${botId}/actions`}>
+            <Menu>
+              <Menu.Item>
+                <Input
+                  icon="filter"
+                  placeholder="Filter actions..."
+                  iconPosition="left"
+                  transparent
+                ></Input>
+              </Menu.Item>
+              <Menu.Menu icon position="right">
+                <Menu.Item onClick={() => {}}>
+                  <Icon name="add"></Icon>
+                </Menu.Item>
+                <Menu.Item onClick={() => {}}>
+                  <Icon name="info circle"></Icon>
+                </Menu.Item>
+              </Menu.Menu>
+            </Menu>
+            <Divider section horizontal>
+              <Icon name="hand point down outline"></Icon>
+            </Divider>
+            <Form>
               {actions.map((action) => (
                 <Form.Field>
                   <Action
@@ -77,68 +142,85 @@ export default function EditBot() {
                   ></Action>
                 </Form.Field>
               ))}
+            </Form>
+            <Divider section horizontal hidden></Divider>
+            <Pagination
+              defaultActivePage={1}
+              ellipsisItem={{
+                content: <Icon name="ellipsis horizontal" />,
+                icon: true,
+              }}
+              firstItem={{
+                content: <Icon name="angle double left" />,
+                icon: true,
+              }}
+              lastItem={{
+                content: <Icon name="angle double right" />,
+                icon: true,
+              }}
+              prevItem={{ content: <Icon name="angle left" />, icon: true }}
+              nextItem={{ content: <Icon name="angle right" />, icon: true }}
+              totalPages={10}
+            />
+          </Route>
+          <Route path={`/bot/${botId}/settings`}>
+            <Form>
+              <Form.Field>
+                <Input
+                  fluid
+                  iconPosition="left"
+                  type="text"
+                  placeholder="Rename bot"
+                  action
+                >
+                  <Icon name="tag"></Icon>
+                  <input />
+                  <Button icon="check"></Button>
+                </Input>
+              </Form.Field>
+              <Form.Field>
+                <Input
+                  fluid
+                  iconPosition="left"
+                  type="text"
+                  placeholder="Change command prefix"
+                  action
+                >
+                  <Icon name="chevron right"></Icon>
+                  <input />
+                  <Button icon="check"></Button>
+                </Input>
+              </Form.Field>
+              <Form.Field>
+                <Input
+                  fluid
+                  iconPosition="left"
+                  type="text"
+                  placeholder="Reset Discord token"
+                  action
+                  type="password"
+                >
+                  <Icon name="key"></Icon>
+                  <input />
+                  <Button icon="check"></Button>
+                </Input>
+              </Form.Field>
+              <Form.Field>
+                <Divider horizontal>
+                  <Icon name="warning sign"></Icon>
+                </Divider>
+              </Form.Field>
               <Form.Field>
                 <Button
-                  content="Add a new action"
+                  content={`Delete this bot forever`}
                   fluid
-                  icon="add"
+                  icon="trash alternate"
                   labelPosition="left"
-                  primary
                 ></Button>
               </Form.Field>
-            </Route>
-          </Switch>
-        </Form>
-      </Segment>
-      <Segment
-        attached="bottom"
-        padded="very"
-        style={{ backgroundColor: "#f3f3f3" }}
-      >
-        <Header as="h5" content="Bot settings" icon="cog"></Header>
-        <Form>
-          <Form.Field>
-            <Input
-              fluid
-              iconPosition="left"
-              type="text"
-              placeholder="Rename bot"
-              action
-            >
-              <Icon name="tag"></Icon>
-              <input />
-              <Button positive icon="cloud upload"></Button>
-            </Input>
-          </Form.Field>
-          <Form.Field>
-            <Input
-              fluid
-              iconPosition="left"
-              type="text"
-              placeholder="Reset Discord token"
-              action
-              type="password"
-            >
-              <Icon name="key"></Icon>
-              <input />
-              <Button positive icon="cloud upload"></Button>
-            </Input>
-          </Form.Field>
-          <Form.Field>
-            <Divider horizontal>
-              <Icon name="warning sign"></Icon>
-            </Divider>
-          </Form.Field>
-          <Form.Field>
-            <Button
-              content={`Delete this bot forever`}
-              fluid
-              icon="trash alternate"
-              labelPosition="left"
-              negative
-            ></Button>
-          </Form.Field>
-        </Form>
+            </Form>
+          </Route>
+        </Switch>
       </Segment>
     </div>
   );

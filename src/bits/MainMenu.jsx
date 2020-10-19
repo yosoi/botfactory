@@ -71,7 +71,6 @@ export default function MainMenu({ bots, views }) {
         fluid
         icon="lock"
         labelPosition="left"
-        secondary
         onClick={(e) => signOut(e)}
         style={{ marginTop: "1rem" }}
       ></Button>
