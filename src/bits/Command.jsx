@@ -1,21 +1,27 @@
-import { Button, Icon, Input, Select } from "semantic-ui-react";
+import { Button, Icon, Input, Label, Select } from "semantic-ui-react";
 
+import DeleteButton from "bits/DeleteButton";
 import React from "react";
+import SaveButton from "bits/SaveButton";
 
-export default function Command({ command, actions }) {
+export default function Command({ actions, onDelete, onSave, prefix }) {
   return (
     <Input
       fluid
-      iconPosition="left"
+      labelPosition="left"
       type="text"
       placeholder="Command trigger"
       action
     >
-      <Icon name="quote left"></Icon>
+      <Label content={prefix} icon="chevron right"></Label>
       <input />
       <Select compact options={actions} />
-      <Button icon="check"></Button>
-      <Button icon="close"></Button>
+      <SaveButton
+        onClick={() => {
+          onSave();
+        }}
+      ></SaveButton>
+      <DeleteButton onClick={() => onDelete()}></DeleteButton>
     </Input>
   );
 }

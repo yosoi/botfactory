@@ -1,25 +1,35 @@
-import { Button, Header, Segment } from "semantic-ui-react";
+import { Menu, Segment } from "semantic-ui-react";
+import { NavLink, Route, Switch } from "react-router-dom";
 
 import React from "react";
 
-export default function View({ action, children, header }) {
+export default function View({ header, subviews }) {
+  const submenu = (
+    <Menu.Menu position={header ? "right" : "left"}>
+      {subviews.map((subview) => (
+        <Menu.Item as={NavLink} {...subview}></Menu.Item>
+      ))}
+    </Menu.Menu>
+  );
   return (
-    <Segment raised padded="very">
-      <Segment basic attached="top" padded>
-        <Header as="h5" content={header.content} icon={header.icon}></Header>
+    <div>
+      <Menu attached="top" tabular>
+        {header ? (
+          <>
+            <Menu.Item header content={header}></Menu.Item>
+            {submenu}
+          </>
+        ) : (
+          submenu
+        )}
+      </Menu>
+      <Segment attached="bottom" padded="very">
+        <Switch>
+          {subviews.map((subview) => (
+            <Route path={subview.to}>{subview.render}</Route>
+          ))}
+        </Switch>
       </Segment>
-      <Segment attached padded="very">
-        {children}
-      </Segment>
-      <Segment attached="bottom">
-        <Button
-          fluid
-          {...action.props}
-          content={action.content}
-          icon={action.icon}
-          labelPosition="left"
-        ></Button>
-      </Segment>
-    </Segment>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Button, Grid, Header, Menu, Rail } from "semantic-ui-react";
+import { Button, Grid, Menu, Rail } from "semantic-ui-react";
 
 import { Link } from "react-router-dom";
 import React from "react";

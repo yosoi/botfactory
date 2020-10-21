@@ -1,8 +1,6 @@
 import {
-  Button,
   Dropdown,
   Form,
-  Header,
   Icon,
   Input,
   Menu,
@@ -12,7 +10,13 @@ import {
 
 import React from "react";
 
-export default function Action({ action, headers, httpMethods, transforms }) {
+export default function Action({
+  headers,
+  httpMethods,
+  onDelete,
+  onSave,
+  transforms,
+}) {
   return (
     <div>
       <Menu attached="top">
@@ -24,11 +28,11 @@ export default function Action({ action, headers, httpMethods, transforms }) {
             placeholder="Name your action..."
           ></Input>
         </Menu.Item>
-        <Menu.Menu icon position="right">
-          <Menu.Item onClick={() => {}}>
+        <Menu.Menu position="right">
+          <Menu.Item onClick={() => onSave()}>
             <Icon name="check"></Icon>
           </Menu.Item>
-          <Menu.Item onClick={() => {}}>
+          <Menu.Item onClick={() => onDelete()}>
             <Icon name="close"></Icon>
           </Menu.Item>
         </Menu.Menu>

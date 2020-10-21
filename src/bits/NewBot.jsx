@@ -10,7 +10,6 @@ import {
 
 import CardField from "bits/CardField";
 import React from "react";
-import View from "bits/View";
 
 export default function NewBot() {
   return (
@@ -68,7 +67,7 @@ export default function NewBot() {
               fluid
               icon="payment"
               labelPosition="left"
-              content="Create Bot - $6"
+              content="Spawn your bot for $6"
               primary
             ></Button>
           </Form.Field>
@@ -77,17 +76,3 @@ export default function NewBot() {
     </div>
   );
 }
-
-/* <View
-action={{
-  content: "Pay $6",
-  icon: "payment",
-  props: { primary: true },
-}}
-header={{
-  content: "Add a new bot to your roster!",
-  icon: "star",
-}}
->
-
-</View> */

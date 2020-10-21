@@ -1,22 +1,53 @@
-import { Button, Header, Segment } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 
+import FilterMenu from "bits/FilterMenu";
+import Info from "bits/Info";
+import PageMenu from "bits/PageMenu";
 import React from "react";
+import SectionDivider from "bits/SectionDivider";
 
-export default function Editor({ button, children, header, style }) {
+export default function Editor({ action, filter, info, items, pagination }) {
   return (
-    <div style={style}>
-      <Segment attached="top">
-        <Header as="h6" content={header.content} icon={header.icon}></Header>
-      </Segment>
-      <Segment attached>{children}</Segment>
-      <Segment attached="bottom">
-        <Button
-          content={button.content}
-          fluid
-          icon={button.icon}
-          labelPosition="left"
-        ></Button>
-      </Segment>
-    </div>
+    <Info {...info}>
+      {filter ? (
+        <>
+          <FilterMenu {...filter}></FilterMenu>
+          <SectionDivider></SectionDivider>
+        </>
+      ) : (
+        <></>
+      )}
+
+      <Form>
+        {items.data.map((item) => (
+          <Form.Field>{items.render(item)}</Form.Field>
+        ))}
+        {action ? (
+          <>
+            <Form.Field>
+              <SectionDivider warning></SectionDivider>
+            </Form.Field>
+            <Form.Field>
+              <Button
+                content={`Delete this bot forever`}
+                fluid
+                icon="trash alternate"
+                labelPosition="left"
+              ></Button>
+            </Form.Field>
+          </>
+        ) : (
+          <></>
+        )}
+      </Form>
+      {pagination ? (
+        <>
+          <SectionDivider hidden></SectionDivider>
+          <PageMenu {...pagination}></PageMenu>
+        </>
+      ) : (
+        <></>
+      )}
+    </Info>
   );
 }
