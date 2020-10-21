@@ -11,7 +11,7 @@ export default function Header(props) {
   return (
     <PropertyEditor placeholder={"Name your header"} {...props}>
       <Input fluid action>
-        <input placeholder="Enter a key..." />
+        <input placeholder="Enter a key..."></input>
         <input
           placeholder="Enter a value..."
           style={{ borderRadius: "0px" }}

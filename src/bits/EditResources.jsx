@@ -68,10 +68,10 @@ export default function EditResources() {
                       leaving your bot.
                     </p>
                     <p>
-                      Transforms are an extremely useful but somewhat advanced
-                      feature. You can{" "}
+                      Transforms are a useful but somewhat advanced feature. You
+                      can{" "}
                       <a href="" target="_blank">
-                        read about transforms
+                        read more about transforms
                       </a>{" "}
                       in the docs.
                     </p>
