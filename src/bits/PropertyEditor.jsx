@@ -28,7 +28,7 @@ export default function PropertyEditor({
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Segment attached="bottom" stacked style={{ backgroundColor: "#fafafa" }}>
+      <Segment attached="bottom" stacked style={{ backgroundColor: "#f0f0f0" }}>
         {children}
       </Segment>
     </>

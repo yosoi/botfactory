@@ -14,7 +14,7 @@ export default function MainMenu({ bots, views }) {
         <Menu.Item>
           <Button
             as={Link}
-            content="Spawn a new bot"
+            content="New bot"
             fluid
             icon="add"
             labelPosition="left"

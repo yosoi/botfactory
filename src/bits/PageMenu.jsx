@@ -2,7 +2,7 @@ import { Icon, Pagination } from "semantic-ui-react";
 
 import React from "react";
 
-export default function PageMenu({ pagination }) {
+export default function PageMenu({ pagination, size }) {
   return (
     <Pagination
       defaultActivePage={1}
@@ -20,6 +20,7 @@ export default function PageMenu({ pagination }) {
       }}
       prevItem={{ content: <Icon name="angle left" />, icon: true }}
       nextItem={{ content: <Icon name="angle right" />, icon: true }}
+      size={size === "small" ? "mini" : "big"}
       totalPages={10}
     />
   );
