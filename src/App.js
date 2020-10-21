@@ -2,12 +2,12 @@ import { Route, Switch } from "react-router-dom";
 
 import AuthWrapper from "bits/AuthWrapper";
 import EditBot from "bits/EditBot";
+import EditResources from "bits/EditResources";
 import { Elements } from "@stripe/react-stripe-js";
 import MainMenu from "bits/MainMenu";
 import NewBot from "bits/NewBot";
 import Page from "bits/Page";
 import React from "react";
-import Resources from "bits/Resources";
 import { loadStripe } from "@stripe/stripe-js";
 
 const HEADERS = "Headers";
@@ -58,7 +58,7 @@ function App() {
               </Route>
               {views.map((view) => (
                 <Route path={view.path}>
-                  <Resources></Resources>
+                  <EditResources></EditResources>
                 </Route>
               ))}
             </Switch>
