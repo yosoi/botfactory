@@ -1,6 +1,7 @@
 import { Button, Icon, Menu } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
 
+import NewBotButton from "bits/NewBotButton";
 import React from "react";
 import signOut from "bits/signOut";
 
@@ -12,15 +13,7 @@ export default function MainMenu({ bots, views }) {
           botspot.
         </Menu.Item>
         <Menu.Item>
-          <Button
-            as={Link}
-            content="New bot"
-            fluid
-            icon="add"
-            labelPosition="left"
-            primary
-            to="/bot/new"
-          ></Button>
+          <NewBotButton></NewBotButton>
         </Menu.Item>
       </Menu>
       <Menu fluid pointing vertical>
@@ -51,7 +44,7 @@ export default function MainMenu({ bots, views }) {
             {item.text}
           </Menu.Item>
         ))}
-        <Menu.Item as={Link} name="billing" target="_blank" to="">
+        <Menu.Item as={Link} name="billing" target="_blank" to="/billing">
           <Icon name="credit card"></Icon>Billing
         </Menu.Item>
       </Menu>

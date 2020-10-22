@@ -18,6 +18,8 @@ const TRANSFORMS = "Transforms";
 const stripePromise = loadStripe(PUBLISHABLE_STRIPE_KEY);
 
 function App() {
+  // TODO: get list of bots from graphql api & subscribe to bot changes
+  // TODO: use context to provide bots to child components
   const bots = [
     { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
     {
@@ -57,7 +59,7 @@ function App() {
                 <EditBot></EditBot>
               </Route>
               {views.map((view) => (
-                <Route path={view.path}>
+                <Route key={view.name} path={view.path}>
                   <EditResources></EditResources>
                 </Route>
               ))}

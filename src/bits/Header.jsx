@@ -1,9 +1,7 @@
-import { Button, Icon, Input, Label } from "semantic-ui-react";
 import React, { useState } from "react";
 
-import DeleteButton from "bits/DeleteButton";
+import { Input } from "semantic-ui-react";
 import PropertyEditor from "bits/PropertyEditor";
-import SaveButton from "bits/SaveButton";
 import ToggleButton from "bits/ToggleButton";
 
 export default function Header(props) {

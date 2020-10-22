@@ -26,7 +26,9 @@ export default function View({ header, subviews }) {
       <Segment attached="bottom" padded="very">
         <Switch>
           {subviews.map((subview) => (
-            <Route path={subview.to}>{subview.render}</Route>
+            <Route key={subview.key} path={subview.to}>
+              {subview.render}
+            </Route>
           ))}
         </Switch>
       </Segment>

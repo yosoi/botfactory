@@ -20,7 +20,7 @@ export default function PageMenu({ pagination, size }) {
       }}
       prevItem={{ content: <Icon name="angle left" />, icon: true }}
       nextItem={{ content: <Icon name="angle right" />, icon: true }}
-      size={size === "small" ? "mini" : "big"}
+      size={size === "small" ? "mini" : "small"}
       totalPages={10}
     />
   );

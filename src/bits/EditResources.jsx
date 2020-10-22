@@ -5,8 +5,8 @@ import Transform from "bits/Transform";
 import View from "bits/View";
 
 export default function EditResources() {
-  const headers = [{}, {}];
-  const transforms = [{}, {}];
+  const headers = [{ key: "012" }, { key: "234" }];
+  const transforms = [{ key: "456" }, { key: "678" }];
   return (
     <View
       header="Resources"
@@ -14,6 +14,7 @@ export default function EditResources() {
         {
           content: "Headers",
           icon: "code",
+          key: "headers",
           render: (
             <Editor
               filter={{
@@ -44,6 +45,7 @@ export default function EditResources() {
                   return <Header {...props}></Header>;
                 },
               }}
+              key="headers"
               pagination={[]}
             ></Editor>
           ),
@@ -52,6 +54,7 @@ export default function EditResources() {
         {
           content: "Transforms",
           icon: "exchange",
+          key: "transforms",
           render: (
             <Editor
               filter={{
@@ -86,6 +89,7 @@ export default function EditResources() {
                 },
               }}
               pagination={[]}
+              key="transforms"
             ></Editor>
           ),
           to: "/transforms",

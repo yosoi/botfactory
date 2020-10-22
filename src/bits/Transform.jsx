@@ -1,19 +1,7 @@
-import {
-  Button,
-  Divider,
-  Form,
-  Grid,
-  Icon,
-  Input,
-  Menu,
-  Select,
-  TextArea,
-} from "semantic-ui-react";
+import { Divider, Form, Grid, Icon, Select, TextArea } from "semantic-ui-react";
 
 import PropertyEditor from "bits/PropertyEditor";
 import React from "react";
-
-const FILE_TYPES = ["JSON", "XML"];
 
 export default function Transform(props) {
   return (

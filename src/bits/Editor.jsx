@@ -6,6 +6,7 @@ import PageMenu from "bits/PageMenu";
 import React from "react";
 import SectionDivider from "bits/SectionDivider";
 
+// TODO: why doesn't the settings view look ok?
 export default function Editor({ action, filter, info, items, pagination }) {
   return (
     <Info {...info}>
@@ -20,22 +21,18 @@ export default function Editor({ action, filter, info, items, pagination }) {
 
       <Form>
         {items.data.map((item) => (
-          <Form.Field>{items.render(item)}</Form.Field>
+          <Form.Field key={item.key}>{items.render(item)}</Form.Field>
         ))}
         {action ? (
-          <>
-            <Form.Field>
-              <SectionDivider warning></SectionDivider>
-            </Form.Field>
-            <Form.Field>
-              <Button
-                content={`Delete this bot forever`}
-                fluid
-                icon="trash alternate"
-                labelPosition="left"
-              ></Button>
-            </Form.Field>
-          </>
+          <Form.Field>
+            <SectionDivider warning></SectionDivider>
+            <Button
+              content={`Delete this bot forever`}
+              fluid
+              icon="trash alternate"
+              labelPosition="left"
+            ></Button>
+          </Form.Field>
         ) : (
           <></>
         )}

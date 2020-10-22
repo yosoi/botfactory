@@ -1,23 +1,9 @@
-import {
-  Dropdown,
-  Form,
-  Icon,
-  Input,
-  Menu,
-  Segment,
-  Select,
-} from "semantic-ui-react";
+import { Dropdown, Form, Icon, Input, Select } from "semantic-ui-react";
 
 import PropertyEditor from "./PropertyEditor";
 import React from "react";
 
-export default function Action({
-  headers,
-  httpMethods,
-  onDelete,
-  onSave,
-  transforms,
-}) {
+export default function Action({ headers, httpMethods, transforms }) {
   return (
     <PropertyEditor placeholder="Name your action...">
       <Form>

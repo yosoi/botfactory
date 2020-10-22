@@ -1,4 +1,4 @@
-import { Button, Icon, Input, Label, Select } from "semantic-ui-react";
+import { Input, Label, Select } from "semantic-ui-react";
 
 import DeleteButton from "bits/DeleteButton";
 import React from "react";

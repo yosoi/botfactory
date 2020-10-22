@@ -63,6 +63,7 @@ export default function EditBot() {
         {
           content: "Commands",
           icon: "bullhorn",
+          key: "commands",
           render: (
             <Editor
               filter={{ placeholder: "Filter your commands..." }}
@@ -97,6 +98,7 @@ export default function EditBot() {
         {
           content: "Actions",
           icon: "lightning",
+          key: "actions",
           render: (
             <Editor
               filter={{ placeholder: "Filter your actions..." }}
@@ -141,6 +143,7 @@ export default function EditBot() {
         {
           content: "Settings",
           icon: "cog",
+          key: "settings",
           render: (
             <Editor
               action={{ icon: "", content: "" }}
