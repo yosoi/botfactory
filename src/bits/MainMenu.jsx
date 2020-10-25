@@ -1,11 +1,13 @@
 import { Button, Icon, Menu } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from "react";
 
+import BotsContext from "bits/BotsContext";
 import NewBotButton from "bits/NewBotButton";
-import React from "react";
 import signOut from "bits/signOut";
 
-export default function MainMenu({ bots, views }) {
+export default function MainMenu({ views }) {
+  const bots = useContext(BotsContext);
   return (
     <div>
       <Menu fluid vertical secondary>
@@ -44,29 +46,27 @@ export default function MainMenu({ bots, views }) {
             {item.text}
           </Menu.Item>
         ))}
-        <Menu.Item as={Link} name="billing" target="_blank" to="/billing">
-          <Icon name="credit card"></Icon>Billing
-        </Menu.Item>
       </Menu>
-      <Button
-        as={Link}
-        content="Docs"
-        fluid
-        icon="map"
-        labelPosition="left"
-        secondary
-        target="_blank"
-        to=""
-      ></Button>
-      <Button
-        basic
-        content="Lock"
-        fluid
-        icon="lock"
-        labelPosition="left"
-        onClick={(e) => signOut(e)}
-        style={{ marginTop: "1rem" }}
-      ></Button>
     </div>
   );
 }
+
+/* <Button
+  as={Link}
+  content="Docs"
+  fluid
+  icon="map"
+  labelPosition="left"
+  secondary
+  to=""
+></Button>
+<Button.Group
+  basic
+  labelPosition="left"
+  fluid
+  vertical
+  style={{ marginTop: "1rem" }}
+>
+  <Button as={Link} content="Billing" icon="credit card" to=""></Button>
+  <Button content="Lock" icon="lock" onClick={(e) => signOut(e)}></Button>
+</Button.Group> */

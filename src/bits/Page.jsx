@@ -1,24 +1,23 @@
 import { Button, Dropdown, Grid, Menu, Rail, Sticky } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
-import React, { useRef } from "react";
+import React, { useContext } from "react";
 
+import BotsContext from "bits/BotsContext";
 import NewBotButton from "./NewBotButton";
 import signOut from "bits/signOut";
 
 export default function Page({ content, menu }) {
-  // TODO: get bots from context
-  const bots = [
-    { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
-    {
-      id: "untitled",
-      name: "Untitled",
-      path: "/bot/untitled",
-      text: "untitiled",
-    },
-    { id: "workbot", name: "Workbot", path: "/bot/workbot", text: "workbot" },
-  ];
-
-  const stickyRef = useRef();
+  const bots = useContext(BotsContext);
+  // const bots = [
+  //   { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
+  //   {
+  //     id: "untitled",
+  //     name: "Untitled",
+  //     path: "/bot/untitled",
+  //     text: "untitiled",
+  //   },
+  //   { id: "workbot", name: "Workbot", path: "/bot/workbot", text: "workbot" },
+  // ];
 
   // TODO: make sure this looks good on all screens
   return (
@@ -65,6 +64,13 @@ export default function Page({ content, menu }) {
                                 </Dropdown.Item>
                               ))}
                               <Dropdown.Divider></Dropdown.Divider>
+                              <Dropdown.Item
+                                as={NavLink}
+                                activeClassName="active"
+                                icon="lightning"
+                                text="Actions"
+                                to="/actions"
+                              ></Dropdown.Item>
                               <Dropdown.Item
                                 as={NavLink}
                                 activeClassName="active"
@@ -139,7 +145,7 @@ export default function Page({ content, menu }) {
               <Grid.Column>
                 {content}
                 <Rail position="left">
-                  <Sticky position="right" ref={stickyRef}>
+                  <Sticky position="right">
                     <Grid>
                       <Grid.Column width={12} floated="right">
                         {menu.primary}
@@ -155,5 +161,3 @@ export default function Page({ content, menu }) {
     </Grid>
   );
 }
-
-// TODO: make menu sticky

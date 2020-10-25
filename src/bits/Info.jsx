@@ -2,6 +2,7 @@ import { Divider, Message } from "semantic-ui-react";
 import React, { useState } from "react";
 
 export default function Info({ children, content, header }) {
+  // TODO: make sure these don't all close when you close one of them
   const [visible, setVisible] = useState(true);
   return visible ? (
     <>

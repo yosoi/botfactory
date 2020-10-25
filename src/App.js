@@ -1,26 +1,24 @@
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import AuthWrapper from "bits/AuthWrapper";
+import { BotsProvider } from "bits/BotsContext";
 import EditBot from "bits/EditBot";
 import EditResources from "bits/EditResources";
 import { Elements } from "@stripe/react-stripe-js";
 import MainMenu from "bits/MainMenu";
 import NewBot from "bits/NewBot";
 import Page from "bits/Page";
-import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 
-const HEADERS = "Headers";
+// TODO: replace this with app-specific key
 const PUBLISHABLE_STRIPE_KEY =
   "pk_test_51H6rIkIw1gARdZqqtmeFOSI8nsqdyHQAtH2XRAkSMSkzCz5AZCPwsUU1BVPqFOa8uwrFihNrMjEkAC7NkEHI7gsF00MxWZlulW";
-const TRANSFORMS = "Transforms";
 
 const stripePromise = loadStripe(PUBLISHABLE_STRIPE_KEY);
 
 function App() {
-  // TODO: get list of bots from graphql api & subscribe to bot changes
-  // TODO: use context to provide bots to child components
-  const bots = [
+  const [bots, setBots] = useState([
     { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
     {
       id: "untitled",
@@ -29,47 +27,59 @@ function App() {
       text: "untitiled",
     },
     { id: "workbot", name: "Workbot", path: "/bot/workbot", text: "workbot" },
-  ];
+  ]);
+
+  useEffect(() => {
+    // TODO: get list of bots from graphql api & subscribe to bot changes
+    console.log("start");
+  }, []);
 
   const views = [
     {
-      name: HEADERS,
-      icon: "code",
-      path: "/headers",
-      text: HEADERS,
+      name: "Actions",
+      icon: "lightning",
+      path: "/actions",
+      text: "Actions",
     },
     {
-      name: TRANSFORMS,
+      name: "Headers",
+      icon: "code",
+      path: "/headers",
+      text: "Headers",
+    },
+    {
+      name: "Transforms",
       icon: "exchange",
       path: "/transforms",
-      text: TRANSFORMS,
+      text: "Transforms",
     },
   ];
 
   return (
     <Elements stripe={stripePromise}>
       <AuthWrapper>
-        <Page
-          content={
-            <Switch>
-              <Route path="/bot/new" exact>
-                <NewBot></NewBot>
-              </Route>
-              <Route path="/bot/:botId">
-                <EditBot></EditBot>
-              </Route>
-              {views.map((view) => (
-                <Route key={view.name} path={view.path}>
-                  <EditResources></EditResources>
+        <BotsProvider value={bots}>
+          <Page
+            content={
+              <Switch>
+                <Route path="/bot/new" exact>
+                  <NewBot></NewBot>
                 </Route>
-              ))}
-            </Switch>
-          }
-          menu={{
-            primary: <MainMenu bots={bots} views={views}></MainMenu>,
-            secondary: <div></div>,
-          }}
-        ></Page>
+                <Route path="/bot/:botId">
+                  <EditBot></EditBot>
+                </Route>
+                {views.map((view) => (
+                  <Route key={view.name} path={view.path}>
+                    <EditResources></EditResources>
+                  </Route>
+                ))}
+              </Switch>
+            }
+            menu={{
+              primary: <MainMenu views={views}></MainMenu>,
+            }}
+          ></Page>
+        </BotsProvider>
       </AuthWrapper>
     </Elements>
   );

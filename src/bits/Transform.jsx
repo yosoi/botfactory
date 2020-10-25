@@ -1,5 +1,6 @@
-import { Divider, Form, Grid, Icon, Select, TextArea } from "semantic-ui-react";
+import { Divider, Grid, Icon, TextArea } from "semantic-ui-react";
 
+import FormatDropdown from "bits/FormatDropdown";
 import PropertyEditor from "bits/PropertyEditor";
 import React from "react";
 
@@ -12,10 +13,10 @@ export default function Transform(props) {
             <Grid>
               <Grid.Row columns={2}>
                 <Grid.Column>
-                  <Select fluid placeholder="Select input type..."></Select>
+                  <FormatDropdown placeholder="Select input type..."></FormatDropdown>
                 </Grid.Column>
                 <Grid.Column>
-                  <Select fluid placeholder="Select output type..."></Select>
+                  <FormatDropdown placeholder="Select output type..."></FormatDropdown>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -26,13 +27,11 @@ export default function Transform(props) {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Form>
-              {/* Replace this with a nice syntax highlighting editor */}
-              <TextArea
-                placeholder="Enter a valid transformer..."
-                style={{ minHeight: "20em" }}
-              ></TextArea>
-            </Form>
+            {/* TODO: Replace this with a nice syntax highlighting editor (codemirror?) */}
+            <TextArea
+              placeholder="Enter a valid transformer..."
+              style={{ minHeight: "20em" }}
+            ></TextArea>
           </Grid.Column>
         </Grid.Row>
       </Grid>

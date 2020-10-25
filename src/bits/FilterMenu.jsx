@@ -13,7 +13,7 @@ export default function FilterMenu({ placeholder, onClickAdd }) {
           transparent
         ></Input>
       </Menu.Item>
-      <Menu.Menu icon position="right">
+      <Menu.Menu position="right">
         <Menu.Item onClick={() => onClickAdd()}>
           <Icon name="add"></Icon>
           Add

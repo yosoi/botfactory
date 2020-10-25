@@ -1,20 +1,31 @@
-import { Dropdown, Form, Icon, Input, Select } from "semantic-ui-react";
+import { Dropdown, Grid, Icon, Input, Select } from "semantic-ui-react";
 
 import PropertyEditor from "./PropertyEditor";
 import React from "react";
 
-export default function Action({ headers, httpMethods, transforms }) {
+export default function Action() {
+  // TODO: get headers and transforms from API
+  // TODO: subscribe to headers and transforms from API
+  const headers = [];
+  const transforms = [];
   return (
     <PropertyEditor placeholder="Name your action...">
-      <Form>
-        <Form.Field>
+      <Grid>
+        {[
           <Input fluid iconPosition="left" type="text" placeholder="URL" action>
             <Icon name="linkify"></Icon>
             <input />
-            <Select compact options={httpMethods} defaultValue="POST" />
-          </Input>
-        </Form.Field>
-        <Form.Field>
+            <Select
+              compact
+              defaultValue="get"
+              options={[
+                { key: "get", value: "get", text: "GET" },
+                { key: "post", value: "post", text: "POST" },
+                { key: "put", value: "put", text: "PUT" },
+                { key: "delete", value: "delete", text: "DELETE" },
+              ]}
+            />
+          </Input>,
           <Dropdown
             placeholder="Headers"
             fluid
@@ -22,93 +33,27 @@ export default function Action({ headers, httpMethods, transforms }) {
             search
             selection
             options={headers}
-          />
-        </Form.Field>
-        <Form.Field>
+          />,
           <Dropdown
             placeholder="Request transform"
             fluid
             search
             selection
             options={transforms}
-          />
-        </Form.Field>
-        <Form.Field>
+          />,
           <Dropdown
             placeholder="Response transform"
             fluid
             search
             selection
             options={transforms}
-          />
-        </Form.Field>
-      </Form>
+          />,
+        ].map((child, index) => (
+          <Grid.Row key={index}>
+            <Grid.Column>{child}</Grid.Column>
+          </Grid.Row>
+        ))}
+      </Grid>
     </PropertyEditor>
   );
-
-  // <div>
-  //     <Menu attached="top">
-  //       <Menu.Item>
-  //         <Input
-  //           transparent
-  //           icon="tag"
-  //           iconPosition="left"
-  //           placeholder="Name your action..."
-  //         ></Input>
-  //       </Menu.Item>
-  //       <Menu.Menu position="right">
-  //         <Menu.Item onClick={() => onSave()}>
-  //           <Icon name="check"></Icon>
-  //         </Menu.Item>
-  //         <Menu.Item onClick={() => onDelete()}>
-  //           <Icon name="close"></Icon>
-  //         </Menu.Item>
-  //       </Menu.Menu>
-  //     </Menu>
-  //     <Segment attached="bottom" stacked style={{ backgroundColor: "#fafafa" }}>
-  // <Form>
-  //   <Form.Field>
-  //     <Input
-  //       fluid
-  //       iconPosition="left"
-  //       type="text"
-  //       placeholder="URL"
-  //       action
-  //     >
-  //       <Icon name="linkify"></Icon>
-  //       <input />
-  //       <Select compact options={httpMethods} defaultValue="POST" />
-  //     </Input>
-  //   </Form.Field>
-  //   <Form.Field>
-  //     <Dropdown
-  //       placeholder="Headers"
-  //       fluid
-  //       multiple
-  //       search
-  //       selection
-  //       options={headers}
-  //     />
-  //   </Form.Field>
-  //   <Form.Field>
-  //     <Dropdown
-  //       placeholder="Request transform"
-  //       fluid
-  //       search
-  //       selection
-  //       options={transforms}
-  //     />
-  //   </Form.Field>
-  //   <Form.Field>
-  //     <Dropdown
-  //       placeholder="Response transform"
-  //       fluid
-  //       search
-  //       selection
-  //       options={transforms}
-  //     />
-  //   </Form.Field>
-  // </Form>
-  //     </Segment>
-  //   </div>
 }
