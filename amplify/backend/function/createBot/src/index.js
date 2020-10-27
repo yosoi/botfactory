@@ -22,10 +22,15 @@ const db = new AWS.DynamoDB.DocumentClient();
 const ec2 = new AWS.EC2();
 
 exports.handler = async (event) => {
+  console.log(event);
   const instanceId = await createInstance();
   const record = {
     id: event.id,
-    name: "Untitled",
+    __typename: "Bot",
+    owner: event.identity.username,
+    label: "Untitled",
+    createdAt: event.timestamp,
+    updatedAt: event.timestamp,
     token: event.arguments.input.token,
     prefix: "!",
     instanceId: instanceId,

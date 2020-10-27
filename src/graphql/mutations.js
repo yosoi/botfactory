@@ -8,7 +8,7 @@ export const createBot = /* GraphQL */ `
   ) {
     createBot(input: $input, condition: $condition) {
       id
-      name
+      label
       token
       instanceId
       instanceState
@@ -25,7 +25,7 @@ export const createBot = /* GraphQL */ `
           updatedAt
           bot {
             id
-            name
+            label
             token
             instanceId
             instanceState
@@ -48,6 +48,7 @@ export const createBot = /* GraphQL */ `
           owner
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -56,14 +57,18 @@ export const createBot = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -94,7 +99,9 @@ export const createDataTransform = /* GraphQL */ `
   ) {
     createDataTransform(input: $input, condition: $condition) {
       id
-      name
+      label
+      inputType
+      outputType
       template
       createdAt
       updatedAt
@@ -108,7 +115,7 @@ export const deleteBot = /* GraphQL */ `
   ) {
     deleteBot(input: $input, condition: $condition) {
       id
-      name
+      label
       token
       instanceId
       instanceState
@@ -125,7 +132,7 @@ export const deleteBot = /* GraphQL */ `
           updatedAt
           bot {
             id
-            name
+            label
             token
             instanceId
             instanceState
@@ -148,6 +155,7 @@ export const deleteBot = /* GraphQL */ `
           owner
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -156,14 +164,18 @@ export const deleteBot = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -194,10 +206,100 @@ export const deleteDataTransform = /* GraphQL */ `
   ) {
     deleteDataTransform(input: $input, condition: $condition) {
       id
-      name
+      label
+      inputType
+      outputType
       template
       createdAt
       updatedAt
+    }
+  }
+`;
+export const updateBot = /* GraphQL */ `
+  mutation UpdateBot($input: UpdateBotInput!) {
+    updateBot(input: $input) {
+      id
+      label
+      token
+      instanceId
+      instanceState
+      prefix
+      createdAt
+      updatedAt
+      commands {
+        items {
+          id
+          botId
+          trigger
+          actionId
+          createdAt
+          updatedAt
+          bot {
+            id
+            label
+            token
+            instanceId
+            instanceState
+            prefix
+            createdAt
+            updatedAt
+            commands {
+              items {
+                id
+                botId
+                trigger
+                actionId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
+          owner
+          action {
+            id
+            label
+            url
+            method
+            requestTransformId
+            responseTransformId
+            createdAt
+            updatedAt
+            requestTransform {
+              id
+              label
+              inputType
+              outputType
+              template
+              createdAt
+              updatedAt
+            }
+            responseTransform {
+              id
+              label
+              inputType
+              outputType
+              template
+              createdAt
+              updatedAt
+            }
+            owner
+            actionHeaders {
+              items {
+                id
+                actionId
+                headerId
+                createdAt
+                updatedAt
+                owner
+              }
+              nextToken
+            }
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -215,7 +317,7 @@ export const createCommand = /* GraphQL */ `
       updatedAt
       bot {
         id
-        name
+        label
         token
         instanceId
         instanceState
@@ -232,7 +334,7 @@ export const createCommand = /* GraphQL */ `
             updatedAt
             bot {
               id
-              name
+              label
               token
               instanceId
               instanceState
@@ -246,6 +348,7 @@ export const createCommand = /* GraphQL */ `
             owner
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -254,14 +357,18 @@ export const createCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -278,6 +385,7 @@ export const createCommand = /* GraphQL */ `
       owner
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -286,14 +394,18 @@ export const createCommand = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -308,6 +420,7 @@ export const createCommand = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -316,14 +429,18 @@ export const createCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -336,8 +453,10 @@ export const createCommand = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -366,7 +485,7 @@ export const updateCommand = /* GraphQL */ `
       updatedAt
       bot {
         id
-        name
+        label
         token
         instanceId
         instanceState
@@ -383,7 +502,7 @@ export const updateCommand = /* GraphQL */ `
             updatedAt
             bot {
               id
-              name
+              label
               token
               instanceId
               instanceState
@@ -397,6 +516,7 @@ export const updateCommand = /* GraphQL */ `
             owner
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -405,14 +525,18 @@ export const updateCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -429,6 +553,7 @@ export const updateCommand = /* GraphQL */ `
       owner
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -437,14 +562,18 @@ export const updateCommand = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -459,6 +588,7 @@ export const updateCommand = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -467,14 +597,18 @@ export const updateCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -487,8 +621,10 @@ export const updateCommand = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -517,7 +653,7 @@ export const deleteCommand = /* GraphQL */ `
       updatedAt
       bot {
         id
-        name
+        label
         token
         instanceId
         instanceState
@@ -534,7 +670,7 @@ export const deleteCommand = /* GraphQL */ `
             updatedAt
             bot {
               id
-              name
+              label
               token
               instanceId
               instanceState
@@ -548,6 +684,7 @@ export const deleteCommand = /* GraphQL */ `
             owner
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -556,14 +693,18 @@ export const deleteCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -580,6 +721,7 @@ export const deleteCommand = /* GraphQL */ `
       owner
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -588,14 +730,18 @@ export const deleteCommand = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -610,6 +756,7 @@ export const deleteCommand = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -618,14 +765,18 @@ export const deleteCommand = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -638,8 +789,10 @@ export const deleteCommand = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -661,6 +814,7 @@ export const createHttpAction = /* GraphQL */ `
   ) {
     createHttpAction(input: $input, condition: $condition) {
       id
+      label
       url
       method
       requestTransformId
@@ -669,14 +823,18 @@ export const createHttpAction = /* GraphQL */ `
       updatedAt
       requestTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
       }
       responseTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
@@ -691,6 +849,7 @@ export const createHttpAction = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -699,14 +858,18 @@ export const createHttpAction = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -727,8 +890,10 @@ export const createHttpAction = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {
@@ -757,6 +922,7 @@ export const updateHttpAction = /* GraphQL */ `
   ) {
     updateHttpAction(input: $input, condition: $condition) {
       id
+      label
       url
       method
       requestTransformId
@@ -765,14 +931,18 @@ export const updateHttpAction = /* GraphQL */ `
       updatedAt
       requestTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
       }
       responseTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
@@ -787,6 +957,7 @@ export const updateHttpAction = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -795,14 +966,18 @@ export const updateHttpAction = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -823,8 +998,10 @@ export const updateHttpAction = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {
@@ -853,6 +1030,7 @@ export const deleteHttpAction = /* GraphQL */ `
   ) {
     deleteHttpAction(input: $input, condition: $condition) {
       id
+      label
       url
       method
       requestTransformId
@@ -861,14 +1039,18 @@ export const deleteHttpAction = /* GraphQL */ `
       updatedAt
       requestTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
       }
       responseTransform {
         id
-        name
+        label
+        inputType
+        outputType
         template
         createdAt
         updatedAt
@@ -883,6 +1065,7 @@ export const deleteHttpAction = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -891,14 +1074,18 @@ export const deleteHttpAction = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -919,8 +1106,10 @@ export const deleteHttpAction = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {
@@ -955,6 +1144,7 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
       updatedAt
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -963,14 +1153,18 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -985,6 +1179,7 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -993,14 +1188,18 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1013,8 +1212,10 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1029,8 +1230,10 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
       owner
       header {
         id
+        label
         key
         value
+        sensitive
         createdAt
         updatedAt
         headerActions {
@@ -1042,6 +1245,7 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -1050,14 +1254,18 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1070,8 +1278,10 @@ export const createHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1100,6 +1310,7 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
       updatedAt
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -1108,14 +1319,18 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -1130,6 +1345,7 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -1138,14 +1354,18 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1158,8 +1378,10 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1174,8 +1396,10 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
       owner
       header {
         id
+        label
         key
         value
+        sensitive
         createdAt
         updatedAt
         headerActions {
@@ -1187,6 +1411,7 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -1195,14 +1420,18 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1215,8 +1444,10 @@ export const updateHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1245,6 +1476,7 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
       updatedAt
       action {
         id
+        label
         url
         method
         requestTransformId
@@ -1253,14 +1485,18 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
         updatedAt
         requestTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
         }
         responseTransform {
           id
-          name
+          label
+          inputType
+          outputType
           template
           createdAt
           updatedAt
@@ -1275,6 +1511,7 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -1283,14 +1520,18 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1303,8 +1544,10 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1319,8 +1562,10 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
       owner
       header {
         id
+        label
         key
         value
+        sensitive
         createdAt
         updatedAt
         headerActions {
@@ -1332,6 +1577,7 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
             updatedAt
             action {
               id
+              label
               url
               method
               requestTransformId
@@ -1340,14 +1586,18 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
               updatedAt
               requestTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
               }
               responseTransform {
                 id
-                name
+                label
+                inputType
+                outputType
                 template
                 createdAt
                 updatedAt
@@ -1360,8 +1610,10 @@ export const deleteHttpActionRequestHeader = /* GraphQL */ `
             owner
             header {
               id
+              label
               key
               value
+              sensitive
               createdAt
               updatedAt
               headerActions {
@@ -1384,8 +1636,10 @@ export const createHttpRequestHeader = /* GraphQL */ `
   ) {
     createHttpRequestHeader(input: $input, condition: $condition) {
       id
+      label
       key
       value
+      sensitive
       createdAt
       updatedAt
       headerActions {
@@ -1397,6 +1651,7 @@ export const createHttpRequestHeader = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -1405,14 +1660,18 @@ export const createHttpRequestHeader = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -1433,8 +1692,10 @@ export const createHttpRequestHeader = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {
@@ -1464,8 +1725,10 @@ export const updateHttpRequestHeader = /* GraphQL */ `
   ) {
     updateHttpRequestHeader(input: $input, condition: $condition) {
       id
+      label
       key
       value
+      sensitive
       createdAt
       updatedAt
       headerActions {
@@ -1477,6 +1740,7 @@ export const updateHttpRequestHeader = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -1485,14 +1749,18 @@ export const updateHttpRequestHeader = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -1513,8 +1781,10 @@ export const updateHttpRequestHeader = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {
@@ -1544,8 +1814,10 @@ export const deleteHttpRequestHeader = /* GraphQL */ `
   ) {
     deleteHttpRequestHeader(input: $input, condition: $condition) {
       id
+      label
       key
       value
+      sensitive
       createdAt
       updatedAt
       headerActions {
@@ -1557,6 +1829,7 @@ export const deleteHttpRequestHeader = /* GraphQL */ `
           updatedAt
           action {
             id
+            label
             url
             method
             requestTransformId
@@ -1565,14 +1838,18 @@ export const deleteHttpRequestHeader = /* GraphQL */ `
             updatedAt
             requestTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
             }
             responseTransform {
               id
-              name
+              label
+              inputType
+              outputType
               template
               createdAt
               updatedAt
@@ -1593,8 +1870,10 @@ export const deleteHttpRequestHeader = /* GraphQL */ `
           owner
           header {
             id
+            label
             key
             value
+            sensitive
             createdAt
             updatedAt
             headerActions {

@@ -1,3 +1,5 @@
+# TODO: add update mutations and resolvers so you can update token, prefix, and label
+# TODO: restart instance (or otherwise reset instance prefix, token data) when Bot is updated
 type Bot
   @auth(
     rules: [
@@ -13,7 +15,7 @@ type Bot
   )
   @model(mutations: null, subscriptions: null) {
   id: ID!
-  name: String!
+  label: String!
   token: ID!
   instanceId: ID!
   instanceState: InstanceState! @function(name: "resolveField-${env}")
@@ -49,8 +51,14 @@ input CreateBotInput {
 }
 
 input CreateDataTransformInput {
-  name: String!
+  label: String!
   template: String!
+}
+
+enum DataFormat {
+  JSON
+  TEXT
+  XML
 }
 
 type DataTransform
@@ -63,7 +71,9 @@ type DataTransform
   )
   @model(mutations: null, subscriptions: null) {
   id: ID!
-  name: String!
+  label: String!
+  inputType: DataFormat!
+  outputType: DataFormat!
   template: String!
 }
 
@@ -85,7 +95,7 @@ type HttpAction
   )
   @model {
   id: ID!
-  name: String!
+  label: String!
   url: AWSURL!
   method: Method!
   actionHeaders: [HttpActionRequestHeader!]!
@@ -132,8 +142,10 @@ type HttpRequestHeader
   )
   @model {
   id: ID!
+  label: String!
   key: String!
   value: String!
+  sensitive: Boolean!
   headerActions: [HttpActionRequestHeader!]!
     @connection(keyName: "ByHttpRequestHeaderId", fields: ["id"])
 }
@@ -178,6 +190,7 @@ type Mutation {
     input: DeleteDataTransformInput!
     condition: ModelDataTransformConditionInput
   ): DataTransform
+  updateBot(input: UpdateBotInput!): Bot
 }
 
 type Subscription {
@@ -187,4 +200,12 @@ type Subscription {
   onDeleteBot(id: ID): Bot @aws_subscribe(mutations: ["deleteBot"])
   onDeleteDataTransform(id: ID!): DataTransform
     @aws_subscribe(mutations: ["deleteDataTransform"])
+  onUpdateBot(botId: ID): Bot @aws_subscribe(mutations: ["updateBot"])
+}
+
+input UpdateBotInput {
+  id: ID!
+  label: String
+  prefix: String
+  token: ID
 }

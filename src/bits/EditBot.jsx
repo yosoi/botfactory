@@ -1,29 +1,48 @@
 import { API, graphqlOperation } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 
-import Action from "bits/Action";
 import { BotProvider } from "bits/BotContext";
 import Command from "bits/Command";
 import Editor from "bits/Editor";
 import Setting from "bits/Setting";
 import View from "bits/View";
-import { getBot } from "graphql/queries";
 import { useParams } from "react-router-dom";
 
 export default function EditBot() {
   const { botId } = useParams();
-  const [bot, setBot] = useState({
-    id: "maester",
-    name: "Maester",
-    path: "/bot/maester",
-    text: "maester",
-  });
+  const [bot, setBot] = useState({});
 
   useEffect(() => {
-    // TODO: get bot from graphql api using botId
-    // TODO: setBot accordingly
+    API.graphql(
+      graphqlOperation(
+        /* GraphQL */ `
+          query GetBot($id: ID!) {
+            getBot(id: $id) {
+              id
+              label
+              prefix
+              commands {
+                items {
+                  id
+                  trigger
+                  action {
+                    id
+                    label
+                  }
+                }
+                nextToken
+              }
+            }
+          }
+        `,
+        { id: botId }
+      )
+    ).then((response) => {
+      setBot(response.data.getBot);
+    });
   }, [botId]);
 
+  // TODO: create commands list from bot.commands when bot.commands changes
   const commands = [
     {
       key: "1",
@@ -37,26 +56,37 @@ export default function EditBot() {
     },
   ];
 
+  function updateBot(botId, data) {
+    return API.graphql(
+      graphqlOperation(
+        /* GraphQL */ `
+          mutation UpdateBot($input: UpdateBotInput!) {
+            updateBot(input: $input) {
+              id
+              label
+              prefix
+            }
+          }
+        `,
+        { input: { id: botId, ...data } }
+      )
+    );
+  }
+
   const settings = [
     {
       icon: "tag",
-      key: "rename",
-      onSave: () => console.log("save"),
-      onDelete: () => console.log("delete"),
+      key: "label",
       placeholder: "Rename your bot...",
     },
     {
       icon: "chevron right",
       key: "prefix",
-      onSave: () => console.log("save"),
-      onDelete: () => console.log("delete"),
       placeholder: "Change your bot's command prefix",
     },
     {
       icon: "key",
       key: "token",
-      onSave: () => console.log("save"),
-      onDelete: () => console.log("delete"),
       placeholder: "Reset your bot's Discord token",
     },
   ];
@@ -64,7 +94,7 @@ export default function EditBot() {
   return (
     <BotProvider value={bot}>
       <View
-        header={`${bot.name}`}
+        header={`${bot.label}`}
         subviews={[
           {
             content: "Commands",
@@ -118,7 +148,16 @@ export default function EditBot() {
                 items={{
                   data: settings,
                   key: "settings",
-                  render: (props) => <Setting {...props}></Setting>,
+                  render: (props) => (
+                    <Setting
+                      onSave={(value) => {
+                        const data = {};
+                        data[props.key] = value;
+                        return updateBot(botId, data);
+                      }}
+                      {...props}
+                    ></Setting>
+                  ),
                 }}
                 key="settings"
               ></Editor>

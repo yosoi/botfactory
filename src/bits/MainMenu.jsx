@@ -1,10 +1,9 @@
-import { Button, Icon, Menu } from "semantic-ui-react";
-import { Link, NavLink } from "react-router-dom";
+import { Icon, Menu } from "semantic-ui-react";
 import React, { useContext } from "react";
 
 import BotsContext from "bits/BotsContext";
+import { NavLink } from "react-router-dom";
 import NewBotButton from "bits/NewBotButton";
-import signOut from "bits/signOut";
 
 export default function MainMenu({ views }) {
   const bots = useContext(BotsContext);
@@ -27,7 +26,7 @@ export default function MainMenu({ views }) {
                 as={NavLink}
                 activeClassName="active"
                 key={bot.id}
-                name={bot.name}
+                name={bot.label}
                 to={`/bot/${bot.id}/commands`}
               ></Menu.Item>
             ))}

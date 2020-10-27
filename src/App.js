@@ -1,3 +1,4 @@
+import { API, graphqlOperation } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
@@ -18,20 +19,29 @@ const PUBLISHABLE_STRIPE_KEY =
 const stripePromise = loadStripe(PUBLISHABLE_STRIPE_KEY);
 
 function App() {
-  const [bots, setBots] = useState([
-    { id: "maester", name: "Maester", path: "/bot/maester", text: "maester" },
-    {
-      id: "untitled",
-      name: "Untitled",
-      path: "/bot/untitled",
-      text: "untitiled",
-    },
-    { id: "workbot", name: "Workbot", path: "/bot/workbot", text: "workbot" },
-  ]);
+  const [bots, setBots] = useState([]);
 
   useEffect(() => {
-    // TODO: get list of bots from graphql api & subscribe to bot changes
+    // TODO: subscribe to bot changes
     console.log("start");
+    API.graphql(
+      graphqlOperation(/* GraphQL */ `
+        query ListBots(
+          $filter: ModelBotFilterInput
+          $limit: Int
+          $nextToken: String
+        ) {
+          listBots(filter: $filter, limit: $limit, nextToken: $nextToken) {
+            items {
+              id
+              label
+            }
+          }
+        }
+      `)
+    ).then((response) => {
+      setBots(response.data.listBots.items);
+    });
   }, []);
 
   const views = [

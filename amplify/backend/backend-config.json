@@ -223,6 +223,27 @@
           ]
         }
       ]
+    },
+    "updateBot": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "botfactory",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "awsUtilitiesLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }

@@ -1,10 +1,18 @@
 import { Icon, Input } from "semantic-ui-react";
+import React, { useEffect, useRef, useState } from "react";
 
 import DeleteButton from "bits/DeleteButton";
-import React from "react";
 import SaveButton from "bits/SaveButton";
 
 export default function Setting({ icon, onSave, onDelete, placeholder }) {
+  const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const inputRef = useRef();
+
+  function onChange(newValue) {
+    setDisabled(newValue == false);
+  }
+
   return (
     <Input
       action
@@ -14,9 +22,29 @@ export default function Setting({ icon, onSave, onDelete, placeholder }) {
       type="text"
     >
       <Icon name={icon}></Icon>
-      <input />
-      <SaveButton onClick={() => onSave()}></SaveButton>
-      <DeleteButton onClick={() => onDelete()}></DeleteButton>
+      <input onChange={(e) => onChange(e.target.value)} ref={inputRef} />
+      <SaveButton
+        disabled={disabled}
+        icon={disabled ? "check" : "save"}
+        loading={loading}
+        onClick={() => {
+          setLoading(true);
+          onSave(inputRef.current.value).finally(() => {
+            setLoading(false);
+            inputRef.current.value = "";
+            onChange(inputRef.current.value);
+          });
+        }}
+        primary={!disabled}
+      ></SaveButton>
+      {onDelete ? (
+        <DeleteButton
+          disabled={false}
+          onClick={() => onDelete()}
+        ></DeleteButton>
+      ) : (
+        <></>
+      )}
     </Input>
   );
 }

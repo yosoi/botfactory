@@ -1,13 +1,13 @@
 import { Dropdown, Grid, Icon, Input, Select } from "semantic-ui-react";
+import React, { useContext } from "react";
 
+import HeadersContext from "bits/HeadersContext";
 import PropertyEditor from "./PropertyEditor";
-import React from "react";
+import TransformsContext from "bits/TransformsContext";
 
 export default function Action() {
-  // TODO: get headers and transforms from API
-  // TODO: subscribe to headers and transforms from API
-  const headers = [];
-  const transforms = [];
+  const headers = useContext(HeadersContext);
+  const transforms = useContext(TransformsContext);
   return (
     <PropertyEditor placeholder="Name your action...">
       <Grid>

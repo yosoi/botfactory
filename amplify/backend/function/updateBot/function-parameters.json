@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "storage": {
+      "Bot:@model(appsync)": [
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "awsUtilitiesLayer",
+      "version": 6
+    }
+  ]
+}
