@@ -216,8 +216,11 @@ export const deleteDataTransform = /* GraphQL */ `
   }
 `;
 export const updateBot = /* GraphQL */ `
-  mutation UpdateBot($input: UpdateBotInput!) {
-    updateBot(input: $input) {
+  mutation UpdateBot(
+    $input: UpdateBotInput!
+    $condition: ModelBotConditionInput
+  ) {
+    updateBot(input: $input, condition: $condition) {
       id
       label
       token

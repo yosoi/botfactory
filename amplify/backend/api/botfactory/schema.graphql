@@ -190,17 +190,17 @@ type Mutation {
     input: DeleteDataTransformInput!
     condition: ModelDataTransformConditionInput
   ): DataTransform
-  updateBot(input: UpdateBotInput!): Bot
+  updateBot(input: UpdateBotInput!, condition: ModelBotConditionInput): Bot @aws_iam @aws_cognito_user_pools
 }
 
 type Subscription {
-  onCreateBot(id: ID): Bot @aws_subscribe(mutations: ["createBot"])
-  onCreateDataTransform(id: ID!): DataTransform
+  onCreateBot(owner: String): Bot @aws_subscribe(mutations: ["createBot"])
+  onCreateDataTransform(owner: String): DataTransform
     @aws_subscribe(mutations: ["createDataTransform"])
-  onDeleteBot(id: ID): Bot @aws_subscribe(mutations: ["deleteBot"])
-  onDeleteDataTransform(id: ID!): DataTransform
+  onDeleteBot(owner: String): Bot @aws_subscribe(mutations: ["deleteBot"])
+  onDeleteDataTransform(owner: String): DataTransform
     @aws_subscribe(mutations: ["deleteDataTransform"])
-  onUpdateBot(botId: ID): Bot @aws_subscribe(mutations: ["updateBot"])
+  onUpdateBot(owner: String): Bot @aws_subscribe(mutations: ["updateBot"]) @aws_iam @aws_cognito_user_pools
 }
 
 input UpdateBotInput {

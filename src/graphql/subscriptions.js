@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBot = /* GraphQL */ `
-  subscription OnCreateBot($id: ID) {
-    onCreateBot(id: $id) {
+  subscription OnCreateBot($owner: String) {
+    onCreateBot(owner: $owner) {
       id
       label
       token
@@ -90,8 +90,8 @@ export const onCreateBot = /* GraphQL */ `
   }
 `;
 export const onCreateDataTransform = /* GraphQL */ `
-  subscription OnCreateDataTransform($id: ID!) {
-    onCreateDataTransform(id: $id) {
+  subscription OnCreateDataTransform($owner: String) {
+    onCreateDataTransform(owner: $owner) {
       id
       label
       inputType
@@ -103,8 +103,8 @@ export const onCreateDataTransform = /* GraphQL */ `
   }
 `;
 export const onDeleteBot = /* GraphQL */ `
-  subscription OnDeleteBot($id: ID) {
-    onDeleteBot(id: $id) {
+  subscription OnDeleteBot($owner: String) {
+    onDeleteBot(owner: $owner) {
       id
       label
       token
@@ -191,8 +191,8 @@ export const onDeleteBot = /* GraphQL */ `
   }
 `;
 export const onDeleteDataTransform = /* GraphQL */ `
-  subscription OnDeleteDataTransform($id: ID!) {
-    onDeleteDataTransform(id: $id) {
+  subscription OnDeleteDataTransform($owner: String) {
+    onDeleteDataTransform(owner: $owner) {
       id
       label
       inputType
@@ -204,8 +204,8 @@ export const onDeleteDataTransform = /* GraphQL */ `
   }
 `;
 export const onUpdateBot = /* GraphQL */ `
-  subscription OnUpdateBot($botId: ID) {
-    onUpdateBot(botId: $botId) {
+  subscription OnUpdateBot($owner: String) {
+    onUpdateBot(owner: $owner) {
       id
       label
       token

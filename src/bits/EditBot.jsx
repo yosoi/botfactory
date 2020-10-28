@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 export default function EditBot() {
   const { botId } = useParams();
-  const [bot, setBot] = useState({});
+  const [bot, setBot] = useState();
 
   useEffect(() => {
     API.graphql(
@@ -40,6 +40,38 @@ export default function EditBot() {
     ).then((response) => {
       setBot(response.data.getBot);
     });
+
+    const botUpdates = API.graphql(
+      graphqlOperation(/* GraphQL */ `
+        subscription OnUpdateBot {
+          onUpdateBot {
+            id
+            label
+            prefix
+            commands {
+              items {
+                id
+                trigger
+                action {
+                  id
+                  label
+                }
+              }
+              nextToken
+            }
+          }
+        }
+      `)
+    ).subscribe({
+      next: (update) => {
+        const data = update.value.data.onUpdateBot;
+        if (data.id === botId) {
+          setBot(data);
+        }
+      },
+    });
+
+    return () => botUpdates.unsubscribe();
   }, [botId]);
 
   // TODO: create commands list from bot.commands when bot.commands changes
@@ -94,7 +126,7 @@ export default function EditBot() {
   return (
     <BotProvider value={bot}>
       <View
-        header={`${bot.label}`}
+        header={bot?.label}
         subviews={[
           {
             content: "Commands",

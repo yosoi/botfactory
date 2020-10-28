@@ -1,5 +1,5 @@
 import { Icon, Input } from "semantic-ui-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import DeleteButton from "bits/DeleteButton";
 import SaveButton from "bits/SaveButton";

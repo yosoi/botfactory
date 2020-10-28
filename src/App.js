@@ -22,8 +22,6 @@ function App() {
   const [bots, setBots] = useState([]);
 
   useEffect(() => {
-    // TODO: subscribe to bot changes
-    console.log("start");
     API.graphql(
       graphqlOperation(/* GraphQL */ `
         query ListBots(
@@ -36,12 +34,55 @@ function App() {
               id
               label
             }
+            nextToken
           }
         }
       `)
     ).then((response) => {
       setBots(response.data.listBots.items);
     });
+
+    const botUpdates = API.graphql(
+      graphqlOperation(/* GraphQL */ `
+        subscription OnUpdateBot {
+          onUpdateBot {
+            id
+            label
+            prefix
+            commands {
+              items {
+                id
+                trigger
+                action {
+                  id
+                  label
+                }
+              }
+              nextToken
+            }
+          }
+        }
+      `)
+    ).subscribe({
+      next: (update) => {
+        const data = update.value.data.onUpdateBot;
+        setBots((bots) => {
+          return bots.map((bot) => {
+            if (bot.id === data.id) {
+              const buffer = { ...bot };
+              Object.entries(data).forEach(([key, value]) => {
+                buffer[key] = value;
+              });
+              return buffer;
+            } else {
+              return bot;
+            }
+          });
+        });
+      },
+    });
+
+    return () => botUpdates.unsubscribe();
   }, []);
 
   const views = [
